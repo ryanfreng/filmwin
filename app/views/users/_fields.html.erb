@@ -6,6 +6,16 @@
 <%= f.label :email %>
 <%= f.text_field :email %>
 
+<%= f.label :mcai_member, "MCAI Member" %>
+Yes <%= f.radio_button :mcai_member, true %>
+No <%= f.radio_button :mcai_member, false %>
+
+<%= f.label :title %>
+<%= f.text_field :title %>
+
+<%= f.label :company %>
+<%= f.text_field :company %>
+
 <%= f.label :password %>
 <%= f.password_field :password %>
 

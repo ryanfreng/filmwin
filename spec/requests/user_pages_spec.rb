@@ -83,7 +83,7 @@ describe "User pages" do
 
         it { should have_title('Sign up') }
         it { should have_content('error') }
-        it { should have_content('5 errors')}
+        it { should have_content('6 errors')}
       end
     end
 
@@ -134,10 +134,16 @@ describe "User pages" do
       it { should have_content("Update your profile") }
       it { should have_title("Edit user") }
       it { should have_link('change', href: 'http://gravatar.com/emails') }
+      it { should have_content('MCAI Member') }
+      it { should have_content('Title') }
+      it { should have_content('Company') }
     end
 
     describe "with invalid information" do
-      before { click_button "Save changes" }
+      before do 
+        fill_in "Email",    with: 'not an email'
+        click_button "Save changes"
+      end
 
       it { should have_content('error') }
     end
@@ -145,11 +151,16 @@ describe "User pages" do
     describe "with valid information" do
       let(:new_name)    { "New Name" }
       let(:new_email)   { "new@example.com" }
+      let(:new_title)   { "New Title" }
+      let(:new_company) { "New Company" }
+
       before do
         fill_in "Name",                   with: new_name
         fill_in "Email",                  with: new_email
         fill_in "Password",               with: user.password
-        fill_in "Confirm Password",  with: user.password
+        fill_in "Confirm Password",       with: user.password
+        fill_in "Title",                  with: new_title
+        fill_in "Company",                with: new_company
         click_button "Save changes"
       end
 
@@ -158,6 +169,55 @@ describe "User pages" do
       it { should have_link('Sign out', href: signout_path) }
       specify { expect(user.reload.name).to eq new_name }
       specify { expect(user.reload.email).to eq new_email }
+      specify { expect(user.reload.title).to eq new_title }
+      specify { expect(user.reload.company).to eq new_company }
+    end
+
+    describe "with valid information but without updating password" do
+      let(:new_name)    { "New Name" }
+      let(:new_email)   { "new@example.com" }
+      let(:new_title)   { "New Title" }
+
+      before do
+        fill_in "Name",       with: new_name
+        fill_in "Email",      with: new_email
+        fill_in "Title",      with: new_title
+        click_button "Save changes"
+      end
+
+      it { should_not have_content('error') }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_link('Sign out', href: signout_path) }
+      specify { expect(user.reload.name).to eq new_name }
+      specify { expect(user.reload.email).to eq new_email }
+      specify { expect(user.reload.title).to eq new_title }
+
+    end
+
+    describe "default form content" do
+      it { should have_selector('#user_name', user.name) }
+      it { should have_selector('#user_email', user.email) }
+      it { should have_selector('#user_title', user.title) }
+      it { should have_selector('#user_company', user.company) }
+
+      describe "is an mcai member" do
+        it { should have_selector("#user_mcai_member_true[checked='checked']")}
+        it { should_not have_unchecked_field("#user_mcai_member_true") }
+        it { should have_no_checked_field("#user_mcai_member_false") }
+      end
+
+      describe "when not an mcai member" do
+        let(:non_member) { FactoryGirl.create(:user, mcai_member: false) }
+        before do
+          sign_in non_member
+          visit edit_user_path(non_member)
+        end
+
+        it { should have_selector("#user_mcai_member_false[checked='checked']")}
+        it { should_not have_unchecked_field("#user_mcai_member_false") }
+        it { should have_no_checked_field("#user_mcai_member_true") }
+      end
+
     end
 
     describe "forbidden attributes" do

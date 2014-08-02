@@ -6,6 +6,9 @@ namespace :db do
                  email: "example@railstutorial.org",
                  password: "foobar",
                  password_confirmation: "foobar",
+                 mcai_member: true,
+                 title: 'Owner',
+                 company: 'THE ONE',
                  admin: true )
     99.times do |n|
       name  = Faker::Name.name

@@ -1,2 +1,29 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<% provide(:title, @event.name) %>
+<div class="center hero-unit">
+  <h1>
+    <%= @event.name %>
+  </h1>
+  <h2>
+    <%= @event.description %>
+  </h2>
+</div>
+<p>
+  <ul>
+    <li><p><strong>Entry Opens:</strong> 
+          <%= pretty_date(@event.entry_start_date) %>
+        </p>
+    </li>
+    <li><p><strong>Entry Closes:</strong> 
+          <%= pretty_date(@event.entry_end_date) %>
+        </p>
+    </li>
+    <li><p><strong>Judging Date:</strong> 
+          <%= pretty_date(@event.judging_date) %>
+        </p>
+    </li>
+    <li><p><strong>Awards Show Date:</strong> 
+          <%= pretty_date_time(@event.show_date) %>
+        </p>
+    </li>
+  </ul>
+</p>

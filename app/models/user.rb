@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6, maximum: 120}, on: :create
   validates :password, length: { minimum: 6, maximum: 120 }, on: :update, allow_blank: true
 
+  has_many :events
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

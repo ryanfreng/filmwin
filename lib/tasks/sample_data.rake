@@ -19,5 +19,15 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+
+    Event.create!( name: "Wave Awards 2014", 
+                        description: "Welcome to the Web Audio Video Excellence
+                        award show! Please see the details and categories
+                        below and enter!",
+                        entry_start_date: Date.today,
+                        entry_end_date:   60.days.from_now,
+                        show_date:        70.days.from_now,
+                        judging_date:     65.days.from_now,
+                        created_by:       admin.id)
   end
 end

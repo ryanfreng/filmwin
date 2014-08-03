@@ -9,4 +9,13 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+
+  def pretty_date(the_time)
+    the_time.strftime("%b %e, %Y")
+  end
+
+  def pretty_date_time(the_time)
+    the_time.strftime("%b %e, %Y, %l:%M%p")
+  end
+
 end

@@ -1,8 +1,6 @@
 Filmwin::Application.routes.draw do
-  get "events/new"
-  get "events/edit"
-  get "events/show"
   resources :users
+  resources :events
   resources :sessions, only: [:new, :create, :destroy]
 
   root 'static_pages#home'

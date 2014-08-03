@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :signed_in_user,  only: [:new, :edit]
+
   def new
   end
 
@@ -6,5 +8,6 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find(params[:id])
   end
 end

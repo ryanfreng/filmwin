@@ -6,7 +6,7 @@
     <%= form_for(@event) do |e| %>
       <%= render 'fields', e: e %>
 
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+      <%= e.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>

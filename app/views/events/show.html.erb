@@ -1,5 +1,8 @@
 <% provide(:title, @event.name) %>
 <div class="center hero-unit">
+  <% if signed_in? and current_user.events.find_by(id: params[:id]) -%>
+  <%= link_to "Edit", edit_event_path(@event) %>
+  <% end -%>
   <h1>
     <%= @event.name %>
   </h1>

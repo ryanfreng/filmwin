@@ -19,7 +19,7 @@ describe 'Event pages' do
     it { should have_content(pretty_date(event.entry_start_date)) }
     it { should have_content(pretty_date(event.entry_end_date)) }
     it { should have_content(pretty_date(event.judging_date)) }
-    it { should have_content(pretty_date(event.show_date)) }
+    it { should have_content(pretty_date(event.show_date)) } 
 
   end
 
@@ -28,6 +28,8 @@ describe 'Event pages' do
       sign_in event.user
       visit edit_event_path(event)
     end
+
+    it { should have_title("Update event") }
 
     describe "page" do
       it { should have_content("Update your event") }
@@ -49,7 +51,7 @@ describe 'Event pages' do
     describe "with valid information" do
       let(:new_name)              { 'New Wave Awards' }
       let(:new_entry_start_date)  { Date.today }
-      let(:new_sub_heading)       { Faker::Lorem.sentence(5) }
+      let(:new_sub_heading)       { Faker::Lorem.sentence(2) }
 
       before do
         fill_in "Name",               with: new_name

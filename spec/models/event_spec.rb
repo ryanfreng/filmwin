@@ -14,6 +14,7 @@ describe Event do
   it { should respond_to(:show_date) }
   it { should respond_to(:judging_date) }
   it { should respond_to(:user_id) }
+  it { should respond_to(:parent_categories) }
 
   it { should be_valid }
 

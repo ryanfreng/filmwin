@@ -1,7 +1,7 @@
 <% provide(:title, @event.name) %>
 <div class="center hero-unit">
   <% if signed_in? and current_user.events.find_by(id: params[:id]) -%>
-  <%= link_to "Edit", edit_event_path(@event) %>
+  <%= link_to "Edit event", edit_event_path(@event) %>
   <% end -%>
   <h1>
     <%= @event.name %>
@@ -33,3 +33,14 @@
     </li>
   </ul>
 </p>
+<h1>Categories</h1>
+<% @event.parent_categories.each do |p| -%>
+<h3><%= p.name %>
+  <%= link_to("Edit category", edit_category_path(p)) if can_edit_event? %></h3>
+<p><%= p.description %></p>
+<ul>
+  <% p.children.each do |c| -%>
+  <li><h4><%= c.name %><%= link_to("Edit category", edit_category_path(c)) if can_edit_event? %></h4><%= c.description %></li>
+  <% end -%>
+</ul>
+<% end -%>

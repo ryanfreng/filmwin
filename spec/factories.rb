@@ -24,4 +24,10 @@ FactoryGirl.define do
     user
   end
 
+  factory :category do
+    name          { Faker::Name.name + ' ' + Faker::Lorem.word }
+    description   { Faker::Lorem.sentence(2) }
+    event
+  end
+
 end

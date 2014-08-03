@@ -20,7 +20,7 @@ namespace :db do
                    password_confirmation: password)
     end
 
-    Event.create!( name: "Wave Awards 2014", 
+    e = Event.create!( name: "Wave Awards 2014", 
                         sub_heading: "Welcome to the Web Audio Video Excellence
                         award show! Please see the details and categories
                         below and enter!",
@@ -40,5 +40,18 @@ namespace :db do
                         show_date:        70.days.from_now,
                         judging_date:     65.days.from_now,
                         user_id:       admin.id)
+    
+    p = Category.create!( name: 'Video Production',
+                      description: "All the things we do", 
+                      event: e)
+    Category.create!( name: 'Producing',
+                      description: 'all the scheduling',
+                      event: e,
+                      parent: p)
+    Category.create!( name: 'Directing',
+                      description: 'making the magic happen',
+                      event: e,
+                      parent: p)
+
   end
 end

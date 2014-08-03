@@ -62,4 +62,8 @@ module SessionsHelper
     redirect_to root_url if signed_in?
   end
 
+  def can_edit_event?
+    signed_in? and current_user.events.find_by(id: params[:id])
+  end
+
 end

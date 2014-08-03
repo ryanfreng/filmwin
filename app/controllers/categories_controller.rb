@@ -22,6 +22,6 @@ class CategoriesController < ApplicationController
     end
 
     def correct_user
-      redirect_to root_url if @category.event.user != current_user
+      redirect_to root_url if Category.find(params[:id]).event.user != current_user
     end
 end

@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'Categegory pages' do
 
   let(:category)  { FactoryGirl.create(:category) }
-  let(:category2) { FactoryGirl.create(:category, parent: category) }
-  let(:category3) { FactoryGirl.create(:category, parent: category) }
+  let(:category2) { FactoryGirl.create(:category, parent_id: category.id, event_id: category.event_id) }
+  let(:category3) { FactoryGirl.create(:category, parent_id: category.id, event_id: category.event_id) }
 
   subject { page }
 
@@ -15,6 +15,7 @@ describe 'Categegory pages' do
 
     it { should have_content(category.name) }
     it { should have_content("Categories") }
+    it { should_not have_link('New category', href: new_category_path)}
 
     describe "when logged in" do
       before do
@@ -25,6 +26,7 @@ describe 'Categegory pages' do
       describe "and owner of event" do
         it { should have_link('Edit event', href: edit_event_path(category.event)) }
         it { should have_link('Edit category', href: edit_category_path(category)) }
+        it { should have_link('New category', href: new_category_path)}
 
         describe "clicking on edit category" do
           before { click_link("Edit category") }
@@ -76,8 +78,16 @@ describe 'Categegory pages' do
        end
 
        describe "without access" do
+        let(:user2) { FactoryGirl.create(:user) }
+        let(:category) { FactoryGirl.create(:category) }
+        before do
+          sign_in user2, no_capybara: true
+          visit edit_category_path(category)
+        end
+        Capybara.exact = true
+        it { should have_title("Filmwin") }
         it { should_not have_content("Update category") }
-        it { should have_title('Home') }
+        
       end
     end
   end

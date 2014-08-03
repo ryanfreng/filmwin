@@ -1,7 +1,7 @@
 Filmwin::Application.routes.draw do
   resources :users
   resources :events
-  resources :categories, only: [:new, :create, :edit, :destroy]
+  resources :categories, only: [:new, :create, :edit, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 
   root 'static_pages#home'

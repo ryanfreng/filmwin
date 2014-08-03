@@ -34,6 +34,7 @@
   </ul>
 </p>
 <h1>Categories</h1>
+<h2><%= link_to "New category", new_category_path if can_edit_event? %>
 <% @event.parent_categories.each do |p| -%>
 <h3><%= p.name %>
   <%= link_to("Edit category", edit_category_path(p)) if can_edit_event? %></h3>

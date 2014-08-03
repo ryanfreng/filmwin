@@ -15,11 +15,13 @@ FactoryGirl.define do
 
   factory :event do
     sequence(:name)   { |n| "Event #{n}" }
-    description       "This is how we do it. Blablablablablablablablablabl"
+    sub_heading       "This is how we do it. Blablablablablablablablablabl"
+    description       "For our description we'll have many many words"*3
     entry_start_date  Date.today
     entry_end_date    60.days.from_now
     judging_date      65.days.from_now
     show_date         70.days.from_now
+    user
   end
 
 end

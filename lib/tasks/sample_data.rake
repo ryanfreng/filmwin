@@ -21,13 +21,24 @@ namespace :db do
     end
 
     Event.create!( name: "Wave Awards 2014", 
-                        description: "Welcome to the Web Audio Video Excellence
+                        sub_heading: "Welcome to the Web Audio Video Excellence
                         award show! Please see the details and categories
                         below and enter!",
+                        description: "The WAVE awards are a celebration of
+                        local talent in the video production industry as well
+                        as web, multimedia, and graphic design fields. Check
+                        out the categories below and enter. This year we've
+                        updated our categories to better reflect the changing
+                        industry as well as added a 'Best in Show' award. This
+                        year our judging will be done by a panel of judges from
+                        around the midwest and coming from a wide range of
+                        professions. We are also joining forces with the newly
+                        created MCAI 30 second film festival and will be 
+                        announcing the winners at the WAVEs.",
                         entry_start_date: Date.today,
                         entry_end_date:   60.days.from_now,
                         show_date:        70.days.from_now,
                         judging_date:     65.days.from_now,
-                        created_by:       admin.id)
+                        user_id:       admin.id)
   end
 end

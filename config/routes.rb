@@ -1,4 +1,7 @@
 Filmwin::Application.routes.draw do
+  get "events/new"
+  get "events/edit"
+  get "events/show"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 

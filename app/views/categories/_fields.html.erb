@@ -1,7 +1,10 @@
-<%= render 'shared/error_messages', object: @category %>
+<%= render 'shared/error_messages', object: object %>
 
 <%= c.label :name %>
 <%= c.text_field :name %>
 
 <%= c.label :description %>
 <%= c.text_field :description %>
+
+<%= c.label :parent_id %>
+<%= c.select :parent_id, event.categories.map{ |cm| [cm.name, cm.id] } %>

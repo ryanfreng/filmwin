@@ -40,6 +40,14 @@ module SessionsHelper
     session[:return_to] = request.url if request.get?
   end
 
+  def current_event_for_new_category=(event)
+    @current_event_for_new_category = event
+  end
+
+  def store_current_event_for_new_category
+    @store_current_event_for_new_category
+  end
+
   # Before filters for controllers
 
   def signed_in_user

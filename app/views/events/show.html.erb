@@ -34,14 +34,28 @@
   </ul>
 </p>
 <h1>Categories</h1>
-<h2><%= link_to "New category", new_category_path if can_edit_event? %>
+<% if can_edit_event? -%>
+  <div class="row">
+  <div class="span4 offset8"><h2>New Category</h2>
+  <%= form_for(@new_category) do |c| %>
+    <%= render 'categories/fields', c: c, object: c.object, event: @event %>
+    <%= c.hidden_field :event_id, value: @event.id %>
+
+    <%= c.submit "Save new category", class: "btn btn-large btn-primary" %>
+  <% end %>
+  </div>
+  </div>
+<% end -%>
+<div class="row">
+  <div class="span6">
 <% @event.parent_categories.each do |p| -%>
-<h3><%= p.name %>
-  <%= link_to("Edit category", edit_category_path(p)) if can_edit_event? %></h3>
+<h3><%= link_to("Edit", edit_category_path(p)) if can_edit_event? %> <%= p.name %></h3>
 <p><%= p.description %></p>
 <ul>
   <% p.children.each do |c| -%>
-  <li><h4><%= c.name %><%= link_to("Edit category", edit_category_path(c)) if can_edit_event? %></h4><%= c.description %></li>
+  <li><h4><%= link_to("Edit", edit_category_path(c)) if can_edit_event? %> <%= c.name %></h4><%= c.description %></li>
   <% end -%>
 </ul>
 <% end -%>
+</div>
+</div>

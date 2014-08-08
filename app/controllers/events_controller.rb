@@ -21,6 +21,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @new_category = Category.new if can_edit_event?
   end
 
   private

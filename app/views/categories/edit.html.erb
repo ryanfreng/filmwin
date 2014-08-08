@@ -4,9 +4,10 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@category) do |c| %>
-      <%= render 'fields', c: c %>
+      <%= render 'fields', c: c, object: c.object, event: @category.event %>
 
       <%= c.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
+    <%= link_to "delete", @category, method: :delete, data: { confirm: "You sure?" } %>
   </div>
 </div>

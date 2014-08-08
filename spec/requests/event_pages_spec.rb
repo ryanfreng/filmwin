@@ -6,6 +6,18 @@ describe 'Event pages' do
 
   subject { page }
 
+  describe "new" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user
+      visit new_event_path
+    end
+
+    it { should have_title("Create an event")}
+
+    
+  end
+
   describe "show" do
 
     before(:each) do

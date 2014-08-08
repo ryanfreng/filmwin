@@ -1,8 +1,10 @@
 class EventsController < ApplicationController
   before_action :signed_in_user,  only: [:new, :edit, :update]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :admin_user, only: [:new]
 
   def new
+    @event = Event.new
   end
 
   def edit
@@ -35,5 +37,9 @@ class EventsController < ApplicationController
     def correct_user
       @event = current_user.events.find_by(id: params[:id])
       redirect_to root_url if @event.nil?
+    end
+
+    def admin_user
+      current_user.admin
     end
 end

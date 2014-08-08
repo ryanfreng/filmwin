@@ -13,7 +13,8 @@ describe 'Event pages' do
       visit new_event_path
     end
 
-    it { should have_title("Create an event")}
+    it { should have_content("Create an Event")}
+    it { should have_title("New Event")}
 
     
   end

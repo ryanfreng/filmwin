@@ -1,2 +1,12 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
+<% provide(:title, 'New Event') %>
+<h1>Create an Event</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@event) do |e| %>
+      <%= render 'fields', e: e %>
+
+      <%= e.submit "Create event", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

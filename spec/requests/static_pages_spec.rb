@@ -10,15 +10,27 @@ describe "Static Pages" do
     it { should have_title(full_title(page_title)) }
   end
 
-  describe "Home page" do
-    before { visit root_path }
-    let(:heading)     { 'Filmwin' }
-    let(:page_title)  { '' }
+  # describe "Home page" do
+  #   before { visit root_path }
+  #   let(:heading)     { 'Filmwin' }
+  #   let(:page_title)  { '' }
 
-    it_should_behave_like "all static pages"
-    it { should_not have_title('| Home') }
+  #   it_should_behave_like "all static pages"
+  #   it { should_not have_title('| Home') }
   
-  end
+  # end
+
+  # describe "Home page" do
+  #   before { visit root_path }
+  #   let(:event) { FactoryGirl.create(:event) }
+  #   let(:heading) { event.name }
+  #   let(:page_title) { '' }
+
+  #   describe "redirects to first event" do
+  #     it_should_behave_like "all static pages"
+  #     it { should_not have_title('| Home' ) }
+  #   end
+  # end
 
   describe "Help page" do
     before { visit help_path }
@@ -56,7 +68,7 @@ describe "Static Pages" do
     click_link "Contact"
     expect(page).to have_title(full_title('Contact') )
     click_link "Home"
-    click_link "Sign up now!"
+    click_link "Enter now!"
     expect(page).to have_title(full_title('Sign up') )
     click_link "Filmwin"
     expect(page).to have_title(full_title('') )

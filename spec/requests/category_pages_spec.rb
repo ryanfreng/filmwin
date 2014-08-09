@@ -164,7 +164,7 @@ describe 'Categegory pages' do
           sign_in user2
           visit edit_category_path(category)
         end
-        specify { expect(current_path).to eq "/" }
+        specify { expect(current_path).to eq "/events/#{category.event.id}" }
         it { should_not have_content("Update category") }
         
       end

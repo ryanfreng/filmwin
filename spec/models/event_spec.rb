@@ -18,7 +18,7 @@ describe Event do
 
   it { should be_valid }
 
-  %w(name description entry_start_date entry_end_date show_date judging_date user_id sub_heading).each do |n|
+  %w(name description user_id sub_heading).each do |n|
     describe "when #{n} is not present" do
       before { event[n] = '' }
       it { should_not be_valid }

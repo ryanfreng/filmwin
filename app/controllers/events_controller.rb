@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   before_action :admin_user, only: [:new, :create]
 
   def new
-    @event = Event.new
+    redirect_to root_url
+    # @event = Event.new
   end
 
   def create
@@ -32,7 +33,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    if params[:id]
+    if params.has_key?(:id) && !params[:id].empty?
       @event = Event.find(params[:id])
       @new_category = Category.new if can_edit_event?
     else

@@ -4,8 +4,7 @@ Filmwin::Application.routes.draw do
   resources :categories, only: [:new, :create, :edit, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 
-  #root 'static_pages#home'
-  root :to => 'events#show',               via: 'get'
+  root 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'

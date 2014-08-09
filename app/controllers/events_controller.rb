@@ -1,10 +1,20 @@
 class EventsController < ApplicationController
   before_action :signed_in_user,  only: [:new, :edit, :update]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :admin_user, only: [:new]
+  before_action :admin_user, only: [:new, :create]
 
   def new
     @event = Event.new
+  end
+
+  def create
+    @event = Event.new(event_params)
+    if @event.save
+      flash[:success] = "Event successfully created"
+      redirect_to @event
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -22,8 +32,13 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
-    @new_category = Category.new if can_edit_event?
+    if params[:id]
+      @event = Event.find(params[:id])
+      @new_category = Category.new if can_edit_event?
+    else
+      @event = Event.first
+      @new_category = Category.new if can_edit_event?
+    end
   end
 
   private
@@ -40,6 +55,6 @@ class EventsController < ApplicationController
     end
 
     def admin_user
-      current_user.admin
+      current_user.admin or redirect_to root_url
     end
 end

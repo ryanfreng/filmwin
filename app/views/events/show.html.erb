@@ -1,14 +1,15 @@
 <% provide(:title, @event.name) %>
-<div class="center hero-unit">
+<div class="jumbotron">
   <% if signed_in? and current_user.events.find_by(id: params[:id]) -%>
   <%= link_to "Edit event", edit_event_path(@event) %>
   <% end -%>
   <h1>
     <%= @event.name %>
   </h1>
-  <h2>
+  <p class="lead">
     <%= @event.sub_heading %>
-  </h2>
+  </p>
+  <p><%= link_to "Enter now", new_event_path, class: "btn btn-lg btn-success" %></p>
 </div>
 <p>
   <%= @event.description %>

@@ -13,9 +13,63 @@ describe 'Event pages' do
       visit new_event_path
     end
 
-    it { should have_content("Create an Event")}
-    it { should have_title("New Event")}
+    describe "regular user" do
+      it { should_not have_content("Create an Event") }
+      it { should_not have_title("New Event") }
+      it { should have_content("Welcome") }
+    end
 
+    describe "admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+      let(:submit) { "Create event" }
+
+      before do
+        sign_in admin
+        visit new_event_path
+      end
+
+      it { should have_content("Create an Event") }
+      it { should have_title("New Event") }
+
+      describe "with invalid information" do
+        it "should not create an event" do
+          expect { click_button submit }.not_to change(Event, :count)
+        end
+
+        describe "after submission" do
+          before { click_button submit }
+
+          it { should have_content('error') }
+          it { should have_content('Create an Event')}
+        end
+      end
+
+      describe "with valid information" do
+        before do
+          fill_in "Name",             with: "My Test Event"
+          fill_in "Sub heading",      with: "This is how we doin a brand new dance now"
+          fill_in "Description",      with: Faker::Lorem.sentence(3)  
+          select_date(Date.today, from: "Entry start date", format: "%d/%m/%Y")
+          select_date(60.days.from_now, from: "Entry end date", format: "%d/%m/%Y")
+          select_date(50.days.from_now, from: "Judging date", format: "%d/%m/%Y")
+          select_date(70.days.from_now, from: "Show date", format: "%d/%m/%Y")
+        end
+
+        it "should create an event" do
+          expect { click_button submit }.not_to change(Event, :count)
+        end
+
+        describe "after saving user" do
+          let(:event) { Event.find_by(name: "My Test Event") }
+          before { click_button submit }
+
+          it { should have_selector('div.alert.alert-success') }
+          it { should have_content(event) }          
+        end
+
+      end
+
+    end
     
   end
 

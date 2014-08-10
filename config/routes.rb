@@ -1,6 +1,7 @@
 Filmwin::Application.routes.draw do
   resources :users
   resources :events
+  resources :submissions
   resources :categories, only: [:new, :create, :edit, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 

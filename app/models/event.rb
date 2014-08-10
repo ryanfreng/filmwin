@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :user
+  has_many  :submissions
   has_many  :categories
   validates :name,  presence: true, length: { maximum: 50 }, 
             uniqueness: { case_sensitive: false }
@@ -13,6 +14,10 @@ class Event < ActiveRecord::Base
 
   def parent_categories 
     categories.where(parent_id: nil).to_a
+  end
+
+  def child_categories
+    categories - parent_categories
   end
 
 end

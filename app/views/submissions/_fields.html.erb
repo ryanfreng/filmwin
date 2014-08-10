@@ -1,0 +1,25 @@
+<%= render 'shared/error_messages', object: @submission %>
+
+<h2><%= @event.name %><%= s.hidden_field :event_id, value: @event.id %></h2>
+<%= s.hidden_field :user_id %>
+
+<%= s.label :category_id %>
+<%= s.select(:category_id, @event.child_categories.map { |value| [value.name, value.id] }) %>
+
+<%= s.label :title %>
+<%= s.text_field :title %>
+
+<%= s.label :videu_url %>
+<%= s.text_field :video_url %>
+
+<%= s.label :user_role, "Role" %>
+<%= s.text_field :user_role %>
+
+<%= s.label :production_company %>
+<%= s.text_field :production_company %>
+
+<%= s.label :budget %>
+<%= s.text_field :budget %>
+
+<%= s.label :comments_other, "Other comments or details" %>
+<%= s.text_area :comments_other %>

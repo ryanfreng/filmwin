@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user,  only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,    only: [:edit, :update]
-  before_action :admin_user,      only: :destroy
+  before_action :signed_in_user,  only: [:edit, :update, :destroy]
+  before_action :correct_user,    only: [:edit, :update, :show, :submissions]
+  before_action :admin_user,      only: [:index, :destroy]
   before_action :redirect_root_if_signed_in, only: [:new, :create]
 
   def index
@@ -10,6 +10,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def submissions
   end
   
   def new

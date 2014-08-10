@@ -156,4 +156,5 @@ describe 'Event pages' do
     end
 
   end
+
 end

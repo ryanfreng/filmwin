@@ -8,4 +8,21 @@
       </h1>
     </section>
   </aside>
+  <div class="span5">
+    <h2>Submissions</h2>
+    <ul>
+      <% @user.submissions.each do |s| -%>
+      <li><h3><%= s.event.name %><small><%= link_to "Edit", edit_submission_path(s) %></small></h3>
+        <h4><%= s.category.name %></h4>
+        <ul>
+          <li><strong>Title:</strong><%= s.title %></li>
+          <li><strong>Role:</strong><%= s.user_role %></li>
+          <li><strong>Client:</strong><%= s.client %></li>
+          <li><strong>Budget:</strong><%= s.budget %></li>
+          <li><strong>Production Company:</strong><%= s.production_company %></li>
+        </ul>
+      </li>
+      <% end -%>
+    </ul>
+  </div>
 </div>

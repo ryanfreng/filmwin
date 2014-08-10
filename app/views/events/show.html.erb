@@ -9,7 +9,7 @@
   <p class="lead">
     <%= @event.sub_heading %>
   </p>
-  <p><%= link_to "Enter now!", new_event_path, class: "btn btn-lg btn-success" %></p>
+  <p><%= link_to "Enter now!", new_submission_path(id: @event.id), class: "btn btn-lg btn-success" %></p>
 </div>
 <p>
   <%= @event.description %>

@@ -2,23 +2,23 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
-    admin = User.create!(name: "Example User",
-                 email: "example@railstutorial.org",
+    admin = User.create!(name: "Ryan Freng",
+                 email: "ryan@backflipfilms.com",
                  password: "foobar",
                  password_confirmation: "foobar",
                  mcai_member: true,
                  title: 'Owner',
-                 company: 'THE ONE',
+                 company: 'Backflip Films',
                  admin: true )
-    99.times do |n|
-      name  = Faker::Name.name
-      email = "example-#{n+1}@railstutorial.org"
-      password  = "password"
-      User.create!(name: name,
-                   email: email,
-                   password: password,
-                   password_confirmation: password)
-    end
+    # 99.times do |n|
+    #   name  = Faker::Name.name
+    #   email = "example-#{n+1}@railstutorial.org"
+    #   password  = "password"
+    #   User.create!(name: name,
+    #                email: email,
+    #                password: password,
+    #                password_confirmation: password)
+    # end
 
     e = Event.create!( name: "Wave Awards 2014", 
                         sub_heading: "Welcome to the Web Audio Video Excellence

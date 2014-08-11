@@ -14,8 +14,8 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
     @submission.user = current_user
     if @submission.save
-      flash[:success] = "Submission successful! Make sure to <a href='/pay'>pay</a> when you're done!"
-      redirect_to event_path(@submission.event)
+      flash[:success] = "Submission successful! Make sure to pay when you're done!"
+      redirect_to user_path(current_user) #event_path(@submission.event)
       #redirect_back_or
     else
       @event = Event.find(submission_params[:event_id])

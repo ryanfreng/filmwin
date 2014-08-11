@@ -9,6 +9,6 @@ class Submission < ActiveRecord::Base
   validates :event, presence: true
   #VALID_VIDEO_URL_REGEX = /http:\/\/(?:www.)?(vimeo|youtube).com\/(?:watch\?v=)?(.*?)(?:\z|&)/
   VALID_VIDEO_URL_REGEX = /(http(s)?\:\/\/)?((www\.)?(youtube|vimeo)\.com|youtu\.?be)\/.+/
-  validates :video_url, presence: true, format: { with: VALID_VIDEO_URL_REGEX }
+  validates :video_url, presence: true, format: { with: VALID_VIDEO_URL_REGEX }, allow_blank: true
 
 end

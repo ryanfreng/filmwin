@@ -1,0 +1,18 @@
+<% provide(:title, 'Upload Submission') %>
+<h1>Upload Submission</h1>
+
+<div class="row">
+  <div class="col-md-3 col-md-offset-4">
+    <h3><%= @submission.event.name %></h3>
+    <h4><%= @submission.category.name %></h4>
+    <%= form_for(@submission, html: { class: "directUpload" }) do |s| %>
+      <div class="field">
+        <span class="btn btn-large btn-primary btn-file">Upload video<%= s.file_field :upload_url %></span>
+      </div>
+
+      <%= s.submit "Save entry", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<%= render '/users/scripts' %>

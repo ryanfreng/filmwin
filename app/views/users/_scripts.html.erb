@@ -1,0 +1,79 @@
+<script>
+$(function() {
+  $('.directUpload').find("input:file").each(function(i, elem) {
+    var fileInput    = $(elem);
+    var form         = $(fileInput.parents('form:first'));
+    var submitButton = form.find('input[type="submit"]');
+    var progressBar  = $("<div class='bar'></div>");
+    var barContainer = $("<div class='progress'></div>").append(progressBar);
+    submitButton.hide();
+    //barContainer.css('display', 'none');
+    //fileInput.parent().after(barContainer);
+    fileInput.fileupload({
+      fileInput:       fileInput,
+      url:             '<%= @s3_direct_post.url %>',
+      type:            'POST',
+      autoUpload:       true,
+      formData:         <%= @s3_direct_post.fields.to_json.html_safe %>,
+      paramName:        'file', // S3 does not like nested name fields i.e. name="user[avatar_url]"
+      dataType:         'XML',  // S3 returns XML if success_action_status is set to 201
+      replaceFileInput: false,
+      progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        progressBar.css('width', progress + '%').
+        text("Uploading " + progress)
+      },
+      start: function (e) {
+        //submitButton.show();
+        submitButton.prop('disabled', true);
+        fileInput.parent().after(barContainer);
+        fileInput.parent().hide();
+
+        progressBar.
+          css('background', 'green').
+          css('display', 'block').
+          css('width', '0%').
+          text("Uploading...");
+
+      },
+      done: function(e, data) {
+        submitButton.prop('disabled', false);
+        progressBar.text("Uploading done");
+
+        // extract key and generate URL from response
+        var key   = $(data.jqXHR.responseXML).find("Key").text();
+        var url   = '//<%= @s3_direct_post.url.host %>/' + key;
+
+        // create hidden field
+        var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url })
+        form.append(input);
+        form.submit();
+      },
+      fail: function(e, data) {
+        submitButton.prop('disabled', false);
+
+        progressBar.
+          css("background", "red").
+          text("Failed");
+      }
+    });
+  });
+
+});
+
+$(document).on('change', '.btn-file :file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+});
+
+$(document).ready( function() {
+    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+        $('.btn-file :file').parent.hide;
+        //console.log(numFiles);
+        //console.log(label);
+    });
+});
+
+</script>

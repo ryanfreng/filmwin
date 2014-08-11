@@ -23,7 +23,7 @@ describe Submission do
   it { should be_valid }
 
   describe "when required elements are not present" do
-    %w(user_id event_id category_id title video_url).each do |s|
+    %w(user_id event_id category_id title).each do |s|
       describe "#{s}" do
         before { submission[s] = nil }
         it { should_not be_valid }

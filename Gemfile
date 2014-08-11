@@ -12,10 +12,12 @@ gem 'faker', '1.4.2'
 gem 'will_paginate', '3.0.7'
 #gem 'bootstrap-will_paginate', '0.0.9'
 gem 'will_paginate-bootstrap', '1.0.1'
+gem 'aws-sdk', '1.50.0'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
+  gem 'foreman', '0.74.0'
 end
 
 group :test do

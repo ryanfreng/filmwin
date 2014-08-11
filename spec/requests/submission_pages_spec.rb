@@ -21,6 +21,18 @@ describe 'Submission Pages' do
     it { should have_content(submission.budget) }
     it { should have_content(submission.production_company) }
     it { should have_link("Edit", href: edit_submission_path(submission)) }
+
+    describe "with no video url" do
+      let(:submission)  { FactoryGirl.create(:submission, video_url: nil) }
+      let(:user)        { submission.user }
+      before do
+        sign_in user
+        visit user_path(user)
+      end
+      
+      it { should have_content('Upload video') }
+    end
+
   end
 
   describe "new" do

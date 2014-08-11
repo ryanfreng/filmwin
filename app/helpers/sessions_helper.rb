@@ -78,4 +78,8 @@ module SessionsHelper
     signed_in? and current_user.events.find_by(id: params[:id])
   end
 
+  def can_edit_submission
+    current_user.submissions.find_by(id: params[:id]) or current_user.admin?
+  end
+
 end

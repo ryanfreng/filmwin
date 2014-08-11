@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810042238) do
+ActiveRecord::Schema.define(version: 20140811095650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140810042238) do
     t.string   "editor"
     t.string   "producer"
     t.string   "cinematographer"
+    t.string   "upload_url"
   end
 
   create_table "users", force: true do |t|

@@ -4,7 +4,7 @@
 <%= render 'shared/error_messages', object: @submission %>
 
 <%= s.label :category_id %>
-<%= s.select :category_id, @event.child_categories.map { |value| [value.name, value.id] }, { prompt: "Choose a category" }, { class: "form-control" } %>
+<%= s.grouped_collection_select :category_id, @event.parent_categories, :children, :name, :id, :name, { prompt: "Choose a category" }, { class: "form-control" } %>
 
 <%= s.label :title %>
 <%= s.text_field :title, placeholder: 'something awesome', class: "form-control" %>

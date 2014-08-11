@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :signed_in_user
-  before_action :correct_user,    only: [:edit, :update, :destroy]
-  before_action :store_location, only: [:new]
+  before_action :can_edit_submission,     only: [:edit, :update, :destroy]
+  before_action :store_location,          only: [:new]
 
   def new
     @event = Event.find(params[:id])
@@ -23,13 +23,35 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def edit
+    @submission = Submission.find(params[:id])
+    @event = @submission.event
+  end
+
   def upload
+    #@submission = Submission.find(params[:id])
+    #if @submission.update_attributes(submission_params)
+    #@submission = Submission.find(params[:id])
+    #@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201, acl: :public_read)
+    #redirect_to user_path(@user) if @submission.video_url.empty?
   end
 
   def update
+    @submission = Submission.find(params[:id])
+    if @submission.update_attributes(submission_params)
+      flash[:success] = "Submission updated"
+      redirect_to current_user
+    else
+      @event = @submission.event
+      render 'edit'
+    end
   end
 
   def destroy
+    event = Event.find(submission.event.id)
+    submission.destroy
+    flash[:success] = "Submission deleted."
+    redirect_to current_user
   end
 
   private
@@ -44,6 +66,7 @@ class SubmissionsController < ApplicationController
                                     :client, 
                                     :title,
                                     :budget,
-                                    :production_company)
+                                    :production_company,
+                                    :upload_url)
     end
 end

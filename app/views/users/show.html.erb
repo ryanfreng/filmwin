@@ -19,8 +19,23 @@
       <h1><%= se.name %></h1>
       <% @user.submissions(where: { event: se }).each do |s| %>
       <div class="col-md-3 col-md-offset-1">
-        <h3><%= s.category.name %> <small><%= link_to "Edit", edit_submission_path(s) %></small></h3>
-        <p><%= s.video_url %></p>
+        <h3><%= s.category.name %> <small><%= link_to '', edit_submission_path(s), class: "glyphicon glyphicon-edit" %>
+          <%= link_to '', s, method: :delete, class: "glyphicon glyphicon-remove-circle", data: { confirm: "You sure?" } %></small></h3>
+        <p>
+        <% if s.upload_url && !s.upload_url.empty? -%>
+          File: <%= s.upload_url.match('\/([^\/]+$)')[1] %>
+        <% elsif s.video_url && !s.video_url.empty? -%>
+          <%= s.video_url %>
+        <% else -%>          
+          <%= form_for(s, html: { class: "directUpload" }) do |sub| %>
+            <div class="field">
+              <span class="btn btn-large btn-primary btn-file">Upload video<%= sub.file_field :upload_url %></span>
+            </div>
+
+            <%= sub.submit "Save entry", class: "btn btn-large btn-primary", style: "display: none;" %>
+          <% end %>
+        <% end -%>
+        </p>
         <h4><%= s.title %></h4>
         <ul>
           <li><strong>Role: </strong><%= s.user_role %></li>
@@ -38,56 +53,5 @@
   </div>
 </div>
 
-<script>
-var videoEmbed = {
-    invoke: function(){
-        
-        $('body').html(function(i, html) {
-            return videoEmbed.convertMedia(html);
-        });
-        
-    },
-    convertMedia: function(html){
-        var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
-        //var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
-        var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z]+)/g;
-        var pattern3 = /([-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?(?:jpg|jpeg|gif|png))/gi;
-        
-        if(pattern1.test(html)){
-           var replacement = '<iframe width="420" height="345" src="//player.vimeo.com/video/$1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
-           
-           var html = html.replace(pattern1, replacement);
-        }
-           
-        
-        if(pattern2.test(html)){
-              var replacement = '<iframe width="233" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>';
-              var html = html.replace(pattern2, replacement);
-        } 
-        
-        
-        if(pattern3.test(html)){
-            var replacement = '<a href="$1" target="_blank"><img class="sml" src="$1" /></a><br />';
-            var html = html.replace(pattern3, replacement);
-        } 
-        
-         
-        
-        
-        
-        
-        return html;
-    }
-}
-
-
-
-
-
-
-setTimeout(function(){
-    videoEmbed.invoke();
-},500);
-
-
-</script>
+<%= render 'scripts' %>
+<%= render 'youtube_embed' %>

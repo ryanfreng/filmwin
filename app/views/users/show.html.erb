@@ -16,7 +16,7 @@
   <div class="col-md-12">    
     <% @user.submission_events.each do |se| -%>
     <div class="row">
-      <h1><%= se.name %></h1>
+      <h1><%= link_to se.name, event_path(se) %></h1>
       <% @user.submissions(where: { event: se }).each do |s| %>
       <div class="col-md-3 col-md-offset-1">
         <h3><%= s.category.name %> <small><%= link_to '', edit_submission_path(s), class: "glyphicon glyphicon-edit" %>

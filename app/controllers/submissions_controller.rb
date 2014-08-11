@@ -18,8 +18,12 @@ class SubmissionsController < ApplicationController
       redirect_to event_path(@submission.event)
       #redirect_back_or
     else
-      render 'new'
+      @event = Event.find(submission_params[:event_id])
+      render "new"
     end
+  end
+
+  def upload
   end
 
   def update

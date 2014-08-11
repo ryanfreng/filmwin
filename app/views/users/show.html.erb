@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="span4">
+  <aside class="col-md-4">
     <section>    
       <h1>
         <%= gravatar_for @user %>
@@ -8,21 +8,86 @@
       </h1>
     </section>
   </aside>
-  <div class="span5">
-    <h2>Submissions</h2>
-    <ul>
-      <% @user.submissions.each do |s| -%>
-      <li><h3><%= s.event.name %><small><%= link_to "Edit", edit_submission_path(s) %></small></h3>
-        <h4><%= s.category.name %></h4>
+  <div class="row">
+    <div class="col-md-4">
+      <h1>Submissions</h1>
+    </div>
+  </div>
+  <div class="col-md-12">    
+    <% @user.submission_events.each do |se| -%>
+    <div class="row">
+      <h1><%= se.name %></h1>
+      <% @user.submissions(where: { event: se }).each do |s| %>
+      <div class="col-md-3 col-md-offset-1">
+        <h3><%= s.category.name %> <small><%= link_to "Edit", edit_submission_path(s) %></small></h3>
+        <p><%= s.video_url %></p>
+        <h4><%= s.title %></h4>
         <ul>
-          <li><strong>Title:</strong><%= s.title %></li>
-          <li><strong>Role:</strong><%= s.user_role %></li>
-          <li><strong>Client:</strong><%= s.client %></li>
-          <li><strong>Budget:</strong><%= s.budget %></li>
-          <li><strong>Production Company:</strong><%= s.production_company %></li>
+          <li><strong>Role: </strong><%= s.user_role %></li>
+          <li><strong>Client: </strong><%= s.client %></li>
+          <li><strong>Budget: </strong><%= s.budget %></li>
+          <li><strong>Production Company: </strong><%= s.production_company %></li>
+          <li><strong>Director: </strong><%= s.director %></li>
+          <li><strong>Cinematographer/Videographer: </strong><%= s.cinematographer %></li>
+          <li><strong>Editor: </strong><%= s.editor %></li>
         </ul>
-      </li>
+      </div>
       <% end -%>
-    </ul>
+    </div>
+    <% end -%>
   </div>
 </div>
+
+<script>
+var videoEmbed = {
+    invoke: function(){
+        
+        $('body').html(function(i, html) {
+            return videoEmbed.convertMedia(html);
+        });
+        
+    },
+    convertMedia: function(html){
+        var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
+        //var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
+        var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z]+)/g;
+        var pattern3 = /([-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?(?:jpg|jpeg|gif|png))/gi;
+        
+        if(pattern1.test(html)){
+           var replacement = '<iframe width="420" height="345" src="//player.vimeo.com/video/$1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+           
+           var html = html.replace(pattern1, replacement);
+        }
+           
+        
+        if(pattern2.test(html)){
+              var replacement = '<iframe width="233" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>';
+              var html = html.replace(pattern2, replacement);
+        } 
+        
+        
+        if(pattern3.test(html)){
+            var replacement = '<a href="$1" target="_blank"><img class="sml" src="$1" /></a><br />';
+            var html = html.replace(pattern3, replacement);
+        } 
+        
+         
+        
+        
+        
+        
+        return html;
+    }
+}
+
+
+
+
+
+
+setTimeout(function(){
+    videoEmbed.invoke();
+},500);
+
+
+</script>

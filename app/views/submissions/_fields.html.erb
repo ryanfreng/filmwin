@@ -1,25 +1,37 @@
-<%= render 'shared/error_messages', object: @submission %>
-
-<h2><%= @event.name %><%= s.hidden_field :event_id, value: @event.id %></h2>
+<h3><%= @event.name %><%= s.hidden_field :event_id, value: @event.id %></h3>
 <%= s.hidden_field :user_id %>
 
+<%= render 'shared/error_messages', object: @submission %>
+
 <%= s.label :category_id %>
-<%= s.select(:category_id, @event.child_categories.map { |value| [value.name, value.id] }) %>
+<%= s.select :category_id, @event.child_categories.map { |value| [value.name, value.id] }, { prompt: "Choose a category" }, { class: "form-control" } %>
 
 <%= s.label :title %>
-<%= s.text_field :title %>
+<%= s.text_field :title, placeholder: 'something awesome', class: "form-control" %>
 
-<%= s.label :videu_url %>
-<%= s.text_field :video_url %>
+<div class="form-group">
+<%= s.label :video_url %>
+<%= s.text_field :video_url, placeholder: "youtube & vimeo", class: "form-control" %>
+<p class="help-block">If you need to upload a video you can do so after you save this submission</p>
+</div>
 
 <%= s.label :user_role, "Role" %>
-<%= s.text_field :user_role %>
+<%= s.text_field :user_role, placeholder: "producer, editor, spectator", class: "form-control" %>
+
+<%= s.label :director%>
+<%= s.text_field :director, placeholder: "spielberg", class: "form-control" %>
+
+<%= s.label :cinematographer, "Cinematographer/Videographer" %>
+<%= s.text_field :cinematographer, placeholder: "richard crudo", class: "form-control" %>
+
+<%= s.label :editor%>
+<%= s.text_field :editor, placeholder: "alan heim", class: "form-control" %>
 
 <%= s.label :production_company %>
-<%= s.text_field :production_company %>
+<%= s.text_field :production_company, placeholder: "edison studios", class: "form-control" %>
 
 <%= s.label :budget %>
-<%= s.text_field :budget %>
+<%= s.text_field :budget, placeholder: "you mean like a number... on paper?", class: "form-control" %>
 
 <%= s.label :comments_other, "Other comments or details" %>
-<%= s.text_area :comments_other %>
+<%= s.text_area :comments_other, class: "form-control" %>

@@ -48,8 +48,9 @@ class SubmissionsController < ApplicationController
   end
 
   def destroy
-    event = Event.find(submission.event.id)
-    submission.destroy
+    @submission = Submission.find(params[:id])
+    @event = Event.find(@submission.event.id)
+    @submission.destroy
     flash[:success] = "Submission deleted."
     redirect_to current_user
   end

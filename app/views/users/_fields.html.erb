@@ -6,9 +6,11 @@
 <%= f.label :email %>
 <%= f.text_field :email %>
 
-<%= f.label :mcai_member, "MCAI Member" %>
-Yes <%= f.radio_button :mcai_member, true %>
-No <%= f.radio_button :mcai_member, false %>
+<div>
+<%= f.label :mcai_member, "MCAI Member", style: 'width: 100%;' %>
+<%= f.radio_button :mcai_member, true, style: 'width: auto; margin-bottom: 15px;'%> Yes
+<%= f.radio_button :mcai_member, false, style: 'width: auto;' %> No
+</div>
 
 <%= f.label :title %>
 <%= f.text_field :title %>

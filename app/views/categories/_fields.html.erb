@@ -7,4 +7,4 @@
 <%= c.text_field :description %>
 
 <%= c.label :parent_id %>
-<%= c.select :parent_id, event.categories.map{ |cm| [cm.name, cm.id] } %>
+<%= c.select :parent_id, event.categories.map{ |cm| [cm.name, cm.id] }, include_blank: "" %>

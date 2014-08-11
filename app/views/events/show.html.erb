@@ -11,33 +11,38 @@
   </p>
   <p><%= link_to "Enter now!", new_submission_path(id: @event.id), class: "btn btn-lg btn-success" %></p>
 </div>
-<p>
-  <%= @event.description %>
-</p>
-<p>
-  <ul>
-    <li><p><strong>Entry Opens:</strong> 
-          <%= pretty_date(@event.entry_start_date) %>
-        </p>
-    </li>
-    <li><p><strong>Entry Closes:</strong> 
-          <%= pretty_date(@event.entry_end_date) %>
-        </p>
-    </li>
-    <li><p><strong>Judging Date:</strong> 
-          <%= pretty_date(@event.judging_date) %>
-        </p>
-    </li>
-    <li><p><strong>Awards Show Date:</strong> 
-          <%= pretty_date_time(@event.show_date) %>
-        </p>
-    </li>
-  </ul>
-</p>
+<div class="row">
+  <p class="col-md-8 col-md-offset-2">
+    <%= @event.description %>
+  </p>
+</div>
+<div class="row text-center">
+  <div class="col-md-3">
+    <span style="font-size: 40px;" class="glyphicon glyphicon-ok"></span>
+    <h3>Entry Opens</h3> 
+    <h4><%= pretty_date(@event.entry_start_date) %></h4>
+  </div>
+  <div class="col-md-3">
+    <span style="font-size: 40px;" class="glyphicon glyphicon-remove"></span>
+    <h3>Entry Closes</h3> 
+    <h4><%= pretty_date(@event.entry_end_date) %></h4>
+  </div>
+  <div class="col-md-3">
+    <span style="font-size: 40px;" class="glyphicon glyphicon-user"></span>
+    <h3>Judging Date</h3> 
+    <h4><%= pretty_date(@event.judging_date) %></h4>
+  </div>
+  <div class="col-md-3">
+    <span style="font-size: 40px;" class="glyphicon glyphicon-gift"></span>
+    <h3>Awards Show</h3> 
+    <h4><%= pretty_date_time(@event.show_date) %></h4>
+  </div>
+</div>
+<div class="container">
 <h1>Categories</h1>
 <% if can_edit_event? -%>
   <div class="row">
-  <div class="span4 offset8"><h2>New Category</h2>
+  <div class="col-md-4 col-md-offset-4"><h2>New Category</h2>
   <%= form_for(@new_category) do |c| %>
     <%= render 'categories/fields', c: c, object: c.object, event: @event %>
     <%= c.hidden_field :event_id, value: @event.id %>
@@ -47,16 +52,18 @@
   </div>
   </div>
 <% end -%>
+
 <div class="row">
-  <div class="span6">
-<% @event.parent_categories.each do |p| -%>
-<h3><%= link_to("Edit", edit_category_path(p)) if can_edit_event? %> <%= p.name %></h3>
-<p><%= p.description %></p>
-<ul>
-  <% p.children.each do |c| -%>
-  <li><h4><%= link_to("Edit", edit_category_path(c)) if can_edit_event? %> <%= c.name %></h4><%= c.description %></li>
+  <% @event.parent_categories.each do |p| -%>
+  <div class="col-md-4">
+    <h3><%= link_to("Edit", edit_category_path(p)) if can_edit_event? %> <%= p.name %></h3>
+    <p><%= p.description %></p>
+    <ul>
+    <% p.children.each do |c| -%>
+      <li><h4><%= link_to("Edit", edit_category_path(c)) if can_edit_event? %> <%= c.name %></h4><%= c.description %></li>
+    <% end -%>
+    </ul>
+  </div>
   <% end -%>
-</ul>
-<% end -%>
 </div>
 </div>

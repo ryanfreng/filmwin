@@ -15,6 +15,10 @@ describe Submission do
   it { should respond_to(:production_company) }
   it { should respond_to(:comments_other) }
   it { should respond_to(:video_url) } 
+  it { should respond_to(:editor) }
+  it { should respond_to(:cinematographer) }
+  it { should respond_to(:director) }
+  it { should respond_to(:producer) }
 
   it { should be_valid }
 

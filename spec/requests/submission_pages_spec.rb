@@ -31,7 +31,9 @@ describe 'Submission Pages' do
       visit new_submission_path(id: event.id)
     end
 
-    it { should have_content("#{event.name} submission") }
+    it { should have_content("New Submission") }
+    it { should have_content(event.name) }
+
   end
 
 end

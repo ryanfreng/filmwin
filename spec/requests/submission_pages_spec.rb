@@ -20,7 +20,7 @@ describe 'Submission Pages' do
     it { should have_content(submission.client) }
     it { should have_content(submission.budget) }
     it { should have_content(submission.production_company) }
-    it { should have_link("Edit", href: edit_submission_path(submission)) }
+    it { should have_link("", href: edit_submission_path(submission)) }
 
     describe "with no video url" do
       let(:submission)  { FactoryGirl.create(:submission, video_url: nil) }

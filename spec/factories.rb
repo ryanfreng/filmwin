@@ -40,6 +40,7 @@ FactoryGirl.define do
     budget              { Faker::Number.number(4) }
     production_company  { Faker::Company.name }
     video_url           { "https://www.youtube.com/watch?v=XyjvCRowFrM"}
+    comments_other      { Faker::Lorem::sentence(4) }
     #after(:create) do |s|
     #  s.event = s.category.event
     #  s.user = s.event.user

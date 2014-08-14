@@ -22,6 +22,7 @@ describe 'Submission Pages' do
     it { should have_content(submission.production_company) }
     it { should have_content(submission.comments_other)}
     it { should have_link("", href: edit_submission_path(submission)) }
+    it { should have_content("Goals of Piece & Other Comments")}
 
     describe "with no video url" do
       let(:submission)  { FactoryGirl.create(:submission, video_url: nil) }
@@ -50,6 +51,7 @@ describe 'Submission Pages' do
     it { should have_content("New Submission") }
     it { should have_content(event.name) }
     it { should have_content('Client') }
+    it { should have_content('Goals of Piece & Other Comments')}
 
     describe "with invalid information" do
 

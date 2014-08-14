@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user_type do
     name            { Faker::Name.name }
-    earlybird_cost  { random(40..65) }
-    standard_cost   { earlybird_cost + random(1..20) }
+    earlybird_cost  { rand(40..65) }
+    standard_cost   { earlybird_cost + rand(1..20) }
   end
 
   factory :user do

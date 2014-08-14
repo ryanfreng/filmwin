@@ -63,11 +63,11 @@ module SessionsHelper
   end
 
   def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    redirect_to(root_url) unless signed_in? && current_user.admin?
   end
 
   def correct_user_or_admin    
-    redirect_to root unless  signed_in? && current_user.admin? or current_user?(User.find(params[:id]))
+    redirect_to root_url unless (signed_in? && current_user.admin?) or current_user?(User.find(params[:id]))
   end
 
   def redirect_root_if_signed_in

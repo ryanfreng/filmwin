@@ -1,15 +1,23 @@
 FactoryGirl.define do
+  factory :user_type do
+    name            { Faker::Name.name }
+    earlybird_cost  { random(40..65) }
+    standard_cost   { earlybird_cost + random(1..20) }
+  end
+
   factory :user do
     sequence(:name)  { |n| "Person #{n}" }
     sequence(:email) { |n| "person_#{n}@example.com"}
     company "Apple"
     title "Neo"
-    mcai_member true
     password "foobar"
     password_confirmation "foobar"
+    user_type
 
     factory :admin do
       admin true
+    end
+
     end
   end
 

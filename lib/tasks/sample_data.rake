@@ -2,11 +2,15 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
+  ut1 = UserType.create!(name: 'MCAI-Member', earlybird_cost: 50, standard_cost: 65)
+  ut2 = UserType.create!(name: 'Non-Member', earlybird_cost: 65, standard_cost: 75)
+  ut3 = UserType.create!(name: 'Student', earlybird_cost: 25, standard_cost: 35)    
+
     admin = User.create!(name: "Ryan Freng",
                  email: "ryan@backflipfilms.com",
                  password: "foobar",
-                 password_confirmation: "foobar",
-                 mcai_member: true,
+                 password_confirmation: "foobar",  
+                 user_type: ut1,               
                  title: 'Owner',
                  company: 'Backflip Films',
                  admin: true )

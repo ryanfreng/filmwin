@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :events
   has_many :submissions
+  belongs_to :user_type
   has_secure_password
   before_save { email.downcase! }
   before_create :create_remember_token

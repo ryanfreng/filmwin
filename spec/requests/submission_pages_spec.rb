@@ -48,6 +48,7 @@ describe 'Submission Pages' do
 
     it { should have_content("New Submission") }
     it { should have_content(event.name) }
+    it { should have_content('Client') }
 
     describe "with invalid information" do
 

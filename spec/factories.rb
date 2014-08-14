@@ -18,7 +18,6 @@ FactoryGirl.define do
       admin true
     end
 
-    end
   end
 
   factory :event do

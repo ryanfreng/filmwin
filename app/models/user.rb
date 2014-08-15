@@ -31,6 +31,21 @@ class User < ActiveRecord::Base
     se
   end
 
+  def unpaid_submissions
+    us = []
+    submissions.each do |s|
+      us << s if s.order.nil?
+    end
+  end
+
+  def current_cost(event)
+    if Date.today < (event.entry_start_date + 30.days)
+      user_type.earlybird_cost
+    else
+      user_type.standard_cost
+    end
+  end
+
   private
 
     def create_remember_token

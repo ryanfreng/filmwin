@@ -1,4 +1,22 @@
 FactoryGirl.define do
+  factory :order do
+    payment_date    { Date.today }
+    email           { Faker::Internet.email }
+    verify_sign     { Faker::Number.number(10)}
+    first_name      { Faker::Name.first_name }
+    last_name       { Faker::Name.last_name }
+    address_city    { Faker::Address.city }
+    address_name    { Faker::Address.street_name }
+    address_state   { Faker::Address.state }
+    address_street  { Faker::Address.building_number }
+    address_zip     { Faker::Address.zip }
+    phone           { Faker::PhoneNumber.phone_number }
+    auth_amount     { rand(50..300) }
+    auth_id         { Faker::Number.number(8) }
+    auth_status     { ["Success", "Pending", "Failure"].sample }
+    payment_status  { ["Paid", "Processing", "Failed"].sample }
+  end
+
   factory :user_type do
     name            { Faker::Name.name }
     earlybird_cost  { rand(40..65) }
@@ -48,10 +66,7 @@ FactoryGirl.define do
     production_company  { Faker::Company.name }
     video_url           { "https://www.youtube.com/watch?v=XyjvCRowFrM"}
     comments_other      { Faker::Lorem::sentence(4) }
-    #after(:create) do |s|
-    #  s.event = s.category.event
-    #  s.user = s.event.user
-    #end
+    order
   end
 
 

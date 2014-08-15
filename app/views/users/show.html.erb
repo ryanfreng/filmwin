@@ -54,6 +54,17 @@
       <% end -%>
     </div>
     <% end -%>
+    <% if @user.submissions.count > 0 %>
+    <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=ryanfreng-facilitator@gmail.com" 
+    data-button="buynow" 
+    data-name="Wave Award Entry" 
+    data-quantity="<%= @user.unpaid_submissions.count %>" 
+    data-amount="<%= @user.current_cost(@user.submissions.first.event) %>" 
+    data-callback-url="https://filmwin.herokuapp.com/users/submissions" 
+    data-return-url="https://127.0.0.1:3000/users/1"
+    data-env="sandbox"
+    ></script>
+    <% end %>
   </div>
   <div>
   </div>

@@ -69,6 +69,10 @@ class SubmissionsController < ApplicationController
                                     :budget,
                                     :production_company,
                                     :upload_url,
-                                    :comments_other)
+                                    :comments_other,
+                                    :director,
+                                    :producer,
+                                    :editor,
+                                    :cinematographer)
     end
 end

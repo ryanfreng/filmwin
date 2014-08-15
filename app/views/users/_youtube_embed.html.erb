@@ -26,7 +26,7 @@ var videoEmbed = {
         
         
         if(pattern3.test(html)){
-            var replacement = '<a href="$1" target="_blank"><img class="sml" src="$1" /></a><br />';
+            var replacement = '<a href="$1" target="_blank"><img class="sml" src="$1" style="max-width: 100%"/></a><br />';
             var html = html.replace(pattern3, replacement);
         } 
         

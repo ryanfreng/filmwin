@@ -25,7 +25,7 @@
           <%= link_to '', s, method: :delete, class: "glyphicon glyphicon-remove-circle", data: { confirm: "You sure?" } %></small></h3>
         <p>
         <% if s.upload_url && !s.upload_url.empty? -%>
-          <span class="alert alert-success">File upload success <%= s.upload_url.match('\/([^\/]+$)')[1] %></span>
+          <div class="alert alert-success">File uploaded successfully!<br /><%= s.upload_url.match('\/([^\/]+$)')[1] %></div>
         <% elsif s.video_url && !s.video_url.empty? -%>
           <%= s.video_url %>
         <% else -%>          

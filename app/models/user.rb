@@ -38,8 +38,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def unpaid_submissions(event)
+    us = []
+    submissions.where(event: event, order_id: nil).each do |s|
+      #us << s if s.order.nil?
+      us << s
+    end
+  end
+
   def current_cost(event)
-    if Date.today < (event.entry_start_date + 30.days)
+    if Date.today < (event.entry_start_date + 3.weeks)
       user_type.earlybird_cost
     else
       user_type.standard_cost

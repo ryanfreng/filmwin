@@ -8,19 +8,14 @@
       </h1>
     </section>
   </aside>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h1>Submissions</h1>
-      <p><%= link_to "New Submission", '/submissions/new?id=1', class: "btn btn-lg btn-success" %></p>
-    </div>
-  </div>
   <div class="col-md-12">    
+    <% if @user.submissions.empty? -%><h1>Wave Awards 2014</h1><p class="text-center"><%= link_to "New Submission", '/submissions/new?id=1', class: "btn btn-lg btn-success" %></p><% end -%>
     <% @user.submission_events.each do |se| -%>
     <div class="row">
-      <h1><%= link_to se.name, event_path(se) %></h1>
-      <p class="text-center">Checkout through paypal will be available soon</p>
-      <% @user.submissions(where: { event: se }).each do |s| %>
-      <div class="col-md-3 col-md-offset-1">
+      <h1><%= link_to se.name, event_path(se) %></h1>      
+      <p class="text-center"><%= link_to "New Submission", new_submission_path(id: se.id), class: "btn btn-lg btn-success" %></p>
+      <% se.submissions.where(user: @user).each do |s| %>           
+      <div class="col-md-4 <%= 'alert alert-warning' if s.order.nil? %>">
         <h3><%= s.category.name %> <small><%= link_to '', edit_submission_path(s), class: "glyphicon glyphicon-edit" %>
           <%= link_to '', s, method: :delete, class: "glyphicon glyphicon-remove-circle", data: { confirm: "You sure?" } %></small></h3>
         <p>
@@ -50,21 +45,27 @@
           <li><strong>Editor: </strong><%= s.editor %></li>
           <li><strong>Goals of Piece & Other Comments: </strong><%= s.comments_other %></li>
         </ul>
+        <small><% if s.order.nil? -%>Payment due for entry: $<%= @user.current_cost(se) %>
+        <% else -%>Payment successful.
+        <% end -%></small>
       </div>
       <% end -%>
     </div>
-    <% end -%>
-    <% if @user.submissions.count > 0 %>
-    <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=ryanfreng-facilitator@gmail.com" 
-    data-button="buynow" 
-    data-name="Wave Award Entry" 
-    data-quantity="<%= @user.unpaid_submissions.count %>" 
-    data-amount="<%= @user.current_cost(@user.submissions.first.event) %>" 
-    data-callback-url="https://filmwin.herokuapp.com/users/submissions" 
-    data-return-url="https://127.0.0.1:3000/users/1"
-    data-env="sandbox"
-    ></script>
-    <% end %>
+    <% if @user.unpaid_submissions(se).count > 0 -%>
+     <h3>Finish and pay through Paypal:
+      <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=ryanfreng-facilitator@gmail.com" 
+      data-button="buynow" 
+      data-name="Wave Award Entry" 
+      data-quantity="<%= @user.unpaid_submissions(se).count %>" 
+      data-amount="<%= @user.current_cost(se) %>" 
+      data-callback-url="https://filmwin.herokuapp.com/users/submissions" 
+      data-return-url="https://127.0.0.1:3000/users/1"
+      data-env="sandbox"
+      ></script></h3>
+    <% else -%>
+      <h3 class="alert alert-success">Your all done! Your submissions and payment were successful! Sit back and relax</h3> 
+    <% end -%>  
+    <% end -%> 
   </div>
   <div>
   </div>

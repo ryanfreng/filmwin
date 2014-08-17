@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   validates :judging_date,  presence: true
   validates :show_date,  presence: true
   validates :user_id, presence: true
+  validates :paypal_email_address, presence: true
 
   def parent_categories 
     categories.where(parent_id: nil).to_a

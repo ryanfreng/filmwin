@@ -4,8 +4,12 @@
 
 Award show submission and judging doesn't have to suck, or be expensive. This app provides a place for you to host submission and judging of an award show. You can provide a youtube or vimeo url or upload files to Amazon S3.
 
-Installation
+Config
 ------------
+
+Create an aws account setup and accepting xss from your host.
+
+Create paypal testing accounts (personal/business) so you can test before you push live.
 
 Make sure to set the following environment variables in a .env file for foreman:
 

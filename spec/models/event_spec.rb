@@ -19,7 +19,7 @@ describe Event do
 
   it { should be_valid }
 
-  %w(name description user_id sub_heading).each do |n|
+  %w(name description user_id sub_heading paypal_email_address).each do |n|
     describe "when #{n} is not present" do
       before { event[n] = '' }
       it { should_not be_valid }

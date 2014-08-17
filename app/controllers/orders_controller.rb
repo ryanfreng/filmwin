@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
       response = validate_IPN_notification(request.raw_post)
       case response
       when "VERIFIED"
-        order = Order.new(txn_id: params(:txn_id)
+        order = Order.new(txn_id: params(:txn_id),
                   email: params(:payer_email),
                   verify_sign: params(:verify_sign),
                   first_name: params(:first_name),

@@ -2,11 +2,12 @@ language: ruby
 rvm:
 - 2.0.0
 env:
-  - secure: "i8/4U4OJWFP+n3YU1HGoSocQUIrasR4bFlx8N3yLFqCOwsdEpJs8CvlNR2Es7n+rtBbHjoel463r7mYXkk8D3arWGyix5U8B5ujk9anPyKdc+lCPrsaiOwsbMIAYjYyiXrgY2AxxuuETKN3Pwe+h3Aqbqo5w+h/J4aZSYYigA9s="
-  - secure: "R1KyNYVji1rMM9QFbQTTQuN3a8aPUUf7SdA7bCoBgwcr5nnOc7ItExrywNybE6QQyIF7FyFUJSJgnLjArR9u/tgfTKN2Dg+Fjl7sMGCJnMnrI0wqK2q6fMdSFdZFe7anm0nyHSZzlPcnaJBOf6288Ot3bFL948Oi4dHrANVtK9w="
-  - secure: "j7ZmiXrcztk5VBDTpSpXSloPLQXWJix5ZxQVwej1RnpObU5bfTgHuGyrMtbP6/AcQo1OuBt68ferkr3WrLXCBt07VUS8MeVpoafcHUvSMK/TyUW3YZUq4EtFHGLc+C8dvOGYNoBnDRKjXQX5zX1IM77jLXCRKp1AozxBByuvhjo="
-  - secure: "FOHEcDe8YJJE/M93SjQHKdgODshmreitJ+MqduoynUpnmLm5nABm0CcEUNhSeAx2qGvSIOyfj7k+U4aeKq2LO/0YDrmj84I4LqE7rfeBxI7kwzFGParAe35vOM2hFrVa+QrNewrTVF9SqGZ6TUGY1ib5xFmVGs9X7mYg3BDN65Q="
-  - secure: "UtUJAFyfPqN7jQFD2oU7Za11STVpyzkBd+gq1JqYo4UaZ8I4W9tXAqzwm6wMw3soGscmVDuB5BPmtAsRRiyAGIAOwWOjayS3NszW4pO8dubbEPXvvxGPDs0J49F/x8S7yG8/2Zm/5Nb2hn1HzcQ2m3oBvOAVPRImr592lk3sNpg="
+  global:
+    - secure: "i8/4U4OJWFP+n3YU1HGoSocQUIrasR4bFlx8N3yLFqCOwsdEpJs8CvlNR2Es7n+rtBbHjoel463r7mYXkk8D3arWGyix5U8B5ujk9anPyKdc+lCPrsaiOwsbMIAYjYyiXrgY2AxxuuETKN3Pwe+h3Aqbqo5w+h/J4aZSYYigA9s="
+    - secure: "R1KyNYVji1rMM9QFbQTTQuN3a8aPUUf7SdA7bCoBgwcr5nnOc7ItExrywNybE6QQyIF7FyFUJSJgnLjArR9u/tgfTKN2Dg+Fjl7sMGCJnMnrI0wqK2q6fMdSFdZFe7anm0nyHSZzlPcnaJBOf6288Ot3bFL948Oi4dHrANVtK9w="
+    - secure: "j7ZmiXrcztk5VBDTpSpXSloPLQXWJix5ZxQVwej1RnpObU5bfTgHuGyrMtbP6/AcQo1OuBt68ferkr3WrLXCBt07VUS8MeVpoafcHUvSMK/TyUW3YZUq4EtFHGLc+C8dvOGYNoBnDRKjXQX5zX1IM77jLXCRKp1AozxBByuvhjo="
+    - secure: "FOHEcDe8YJJE/M93SjQHKdgODshmreitJ+MqduoynUpnmLm5nABm0CcEUNhSeAx2qGvSIOyfj7k+U4aeKq2LO/0YDrmj84I4LqE7rfeBxI7kwzFGParAe35vOM2hFrVa+QrNewrTVF9SqGZ6TUGY1ib5xFmVGs9X7mYg3BDN65Q="
+    - secure: "UtUJAFyfPqN7jQFD2oU7Za11STVpyzkBd+gq1JqYo4UaZ8I4W9tXAqzwm6wMw3soGscmVDuB5BPmtAsRRiyAGIAOwWOjayS3NszW4pO8dubbEPXvvxGPDs0J49F/x8S7yG8/2Zm/5Nb2hn1HzcQ2m3oBvOAVPRImr592lk3sNpg="
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database filmwin_ci_test;' -U postgres

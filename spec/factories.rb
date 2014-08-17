@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :order do
     payment_date    { Date.today }
-    email           { Faker::Internet.email }
     verify_sign     { Faker::Number.number(10)}
     first_name      { Faker::Name.first_name }
     last_name       { Faker::Name.last_name }
@@ -10,10 +9,8 @@ FactoryGirl.define do
     address_state   { Faker::Address.state }
     address_street  { Faker::Address.building_number }
     address_zip     { Faker::Address.zip }
-    phone           { Faker::PhoneNumber.phone_number }
-    auth_amount     { rand(50..300) }
-    auth_id         { Faker::Number.number(8) }
-    auth_status     { ["Success", "Pending", "Failure"].sample }
+    payment_gross   { rand(50..300) }
+    txn_id          { Faker::Number.number(8) }
     payment_status  { ["Paid", "Processing", "Failed"].sample }
   end
 

@@ -28,19 +28,25 @@ describe 'Submission Pages' do
     it { should have_content("Goals of Piece & Other Comments")}
 
     describe "with no video url" do
-      let(:submission)  { FactoryGirl.create(:submission, video_url: nil) }
-      let(:user)        { submission.user }
+      let(:submission2)  { FactoryGirl.create(:submission, video_url: nil) }
+      let(:user2)        { submission2.user }
       before do
-        sign_in user
-        visit user_path(user)
+        sign_in user2
+        visit user_path(user2)
       end
       
       it { should have_content('Upload video') }
     end
 
     describe "unpaid submission" do
+      let(:submission3) { FactoryGirl.create(:submission, order: nil) }
+      let(:user3)       { submission3.user }
+      before do
+        sign_in user3
+        visit user_path(user3)
+      end
       it { should have_content("Payment due") }
-      it { should have_content(user.current_cost(submission.event)) }
+      it { should have_content(user3.current_cost(submission3.event)) }
       it { should have_content("Finish and Pay") }
     end
 

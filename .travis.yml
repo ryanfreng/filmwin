@@ -8,3 +8,5 @@ env:
     secure: "j7ZmiXrcztk5VBDTpSpXSloPLQXWJix5ZxQVwej1RnpObU5bfTgHuGyrMtbP6/AcQo1OuBt68ferkr3WrLXCBt07VUS8MeVpoafcHUvSMK/TyUW3YZUq4EtFHGLc+C8dvOGYNoBnDRKjXQX5zX1IM77jLXCRKp1AozxBByuvhjo="
     secure: "FOHEcDe8YJJE/M93SjQHKdgODshmreitJ+MqduoynUpnmLm5nABm0CcEUNhSeAx2qGvSIOyfj7k+U4aeKq2LO/0YDrmj84I4LqE7rfeBxI7kwzFGParAe35vOM2hFrVa+QrNewrTVF9SqGZ6TUGY1ib5xFmVGs9X7mYg3BDN65Q="
     secure: "UtUJAFyfPqN7jQFD2oU7Za11STVpyzkBd+gq1JqYo4UaZ8I4W9tXAqzwm6wMw3soGscmVDuB5BPmtAsRRiyAGIAOwWOjayS3NszW4pO8dubbEPXvvxGPDs0J49F/x8S7yG8/2Zm/5Nb2hn1HzcQ2m3oBvOAVPRImr592lk3sNpg="
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres

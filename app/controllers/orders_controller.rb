@@ -2,8 +2,9 @@ class OrdersController < ApplicationController
   protect_from_forgery :except => [:create]
 
   def create
-    if parrams.has_key?(:txn_id)
+    if params.has_key?(:txn_id)
       response = validate_IPN_notification(request.raw_post)
+      logger.info("Here's the response: #{response}")
       case response
       when "VERIFIED"
         order = Order.new(txn_id: params(:txn_id),
@@ -37,7 +38,7 @@ class OrdersController < ApplicationController
 
   protected
     def validate_IPN_notification(raw)
-      uri = URI.parse(PAYPAL_ADDRESS + "?cmd=notify-validate")
+      uri = URI.parse(ENV['PAYPAL_ADDRESS'] + "?cmd=_notify-validate")
       http = Net::HTTP.new(uri.host, uri.port)
       http.open_timeout = 60
       http.read_timeout = 6-

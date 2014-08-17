@@ -102,7 +102,7 @@ describe 'Event pages' do
     describe "page" do
       it { should have_content("Update your event") }
       ['Name', 'Sub heading', 'Description', 'Entry start date',
-                'Entry end date', 'Judging date', 'Show date'].each do |n|
+                'Entry end date', 'Judging date', 'Show date', 'Paypal email address'].each do |n|
         it { should have_content(n) }
       end
     end
@@ -121,11 +121,13 @@ describe 'Event pages' do
       let(:new_name)              { 'New Wave Awards' }
       let(:new_entry_start_date)  { Date.today }
       let(:new_sub_heading)       { Faker::Lorem.sentence(2) }
+      let(:new_paypal_email)      { 'random_facilitator@gmail.com' }
 
       before do
-        fill_in "Name",               with: new_name
-        fill_in "Entry start date",   with: new_entry_start_date
-        fill_in "Sub heading",        with: new_sub_heading
+        fill_in "Name",                 with: new_name
+        fill_in "Entry start date",     with: new_entry_start_date
+        fill_in "Sub heading",          with: new_sub_heading
+        fill_in "Paypal email address", with: new_paypal_email
         click_button "Save changes"
       end
 
@@ -135,6 +137,7 @@ describe 'Event pages' do
       specify { expect(event.reload.name).to eq new_name }
       specify { expect(event.reload.entry_start_date).to eq new_entry_start_date }
       specify { expect(event.reload.sub_heading).to eq new_sub_heading }
+      specify { expect(event.reload.paypal_email_address).to eq new_paypal_email }
 
     end
 

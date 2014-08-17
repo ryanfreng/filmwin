@@ -9,7 +9,7 @@ var videoEmbed = {
     },
     convertMedia: function(html){
         var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
-        var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z]+)/g;
+        var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z_]+)/g;
         var pattern3 = /([-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?(?:jpg|jpeg|gif|png))/gi;
         
         if(pattern1.test(html)){
@@ -20,7 +20,7 @@ var videoEmbed = {
            
         
         if(pattern2.test(html)){
-              var replacement = '<iframe width="220" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>';
+              var replacement = '<iframe width="100%" height="203" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>';
               var html = html.replace(pattern2, replacement);
         } 
         
@@ -42,5 +42,6 @@ var videoEmbed = {
 setTimeout(function(){
     videoEmbed.invoke();
 },500);
+
 
 </script>

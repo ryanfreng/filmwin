@@ -15,6 +15,7 @@ describe Event do
   it { should respond_to(:judging_date) }
   it { should respond_to(:user_id) }
   it { should respond_to(:parent_categories) }
+  it { should respond_to(:paypal_email_address) }
 
   it { should be_valid }
 

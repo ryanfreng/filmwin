@@ -21,6 +21,9 @@ describe 'Submission Pages' do
     it { should have_content(submission.budget) }
     it { should have_content(submission.production_company) }
     it { should have_content(submission.comments_other)}
+    it { should have_content(submission.director) }
+    it { should have_content(submission.editor) }
+    it { should have_content(submission.producer) }
     it { should have_link("", href: edit_submission_path(submission)) }
     it { should have_content("Goals of Piece & Other Comments")}
 
@@ -33,6 +36,12 @@ describe 'Submission Pages' do
       end
       
       it { should have_content('Upload video') }
+    end
+
+    describe "unpaid submission" do
+      it { should have_content("Payment due") }
+      it { should have_content(user.current_cost(submission.event)) }
+      it { should have_content("Finish and Pay") }
     end
 
   end

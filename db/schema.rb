@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140817014655) do
+ActiveRecord::Schema.define(version: 20140817030545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140817014655) do
     t.integer  "user_id"
     t.string   "sub_heading"
     t.string   "paypal_email_address"
+    t.string   "txn_id"
   end
 
   create_table "orders", force: true do |t|
@@ -50,10 +51,7 @@ ActiveRecord::Schema.define(version: 20140817014655) do
     t.string   "address_state"
     t.string   "address_street"
     t.string   "address_zip"
-    t.string   "phone"
-    t.string   "auth_amount"
-    t.string   "auth_id"
-    t.string   "auth_status"
+    t.string   "payment_gross"
     t.string   "payment_status"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -71,15 +71,6 @@
           <input type="hidden" name="bn" value="JavaScriptButton_buynow">
           <button type="submit" class="btn btn-large btn-success">Finish and Pay</button></form>
 
-        <!--<script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=ryanfreng-facilitator@gmail.com" 
-        data-button="buynow" 
-        data-name="Wave Awards, <%= pluralize(@user.unpaid_submissions(se).count, 'Entry') %>: <%= unpaid_submissions.collect { |s| s.title + '-' + s.id.to_s }.join(',') %>" 
-        data-quantity="<%= @user.unpaid_submissions(se).count %>" 
-        data-amount="<%= @user.current_cost(se) %>" 
-        data-callback-url="https://filmwin.herokuapp.com/order/new?" 
-        data-return-url="https://127.0.0.1:3000/users/<%= @user.id %>"
-        data-env="sandbox"
-        ></script>-->
       <% else -%>
         <h3 class="alert alert-success">Your all done! Your submissions and payment were successful! Sit back and relax</h3> 
       <% end -%> 

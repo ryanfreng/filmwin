@@ -10,4 +10,4 @@ env:
     secure: "UtUJAFyfPqN7jQFD2oU7Za11STVpyzkBd+gq1JqYo4UaZ8I4W9tXAqzwm6wMw3soGscmVDuB5BPmtAsRRiyAGIAOwWOjayS3NszW4pO8dubbEPXvvxGPDs0J49F/x8S7yG8/2Zm/5Nb2hn1HzcQ2m3oBvOAVPRImr592lk3sNpg="
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database filmwin_ci_test;' -U postgres

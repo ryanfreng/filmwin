@@ -22,7 +22,8 @@ class OrdersController < ApplicationController
                   address_street: params[:address_street],
                   address_zip: params[:address_zip],
                   payment_gross: params[:payment_gross],
-                  payment_status: params[:payment_status])
+                  payment_status: params[:payment_status],
+                  payment_date: params[:payment_date])
         if order.save
           submissions = Submission.find(/ids=\[(.*)\]/.match(params[:item_name])[1].split(',') )
           submissions.each do |s|

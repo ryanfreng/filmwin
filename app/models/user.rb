@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :events
-  has_many :submissions
+  has_many :submissions, dependent: :destroy
   belongs_to :user_type
   has_secure_password
   before_save { email.downcase! }

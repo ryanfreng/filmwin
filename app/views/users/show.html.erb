@@ -57,14 +57,14 @@
       <p>
       <% unpaid_submissions = @user.unpaid_submissions(se) -%>
       <% if unpaid_submissions.count > 0 -%>
-        <form method="post" action="<%= PAYPAL_ADDRESS %>" class="" target="_top">
+        <form method="post" action="<%= ENV['PAYPAL_ADDRESS'] %>" class="" target="_top">
           <div class="hide" id="errorBox"></div>
           <input type="hidden" name="button" value="buynow">
           <input type="hidden" name="item_name" value="Wave Awards, <%= pluralize(@user.unpaid_submissions(se).count, 'Entry') %>: <%= unpaid_submissions.collect { |s| s.title }.join(',') %>, ids=[<%= unpaid_submissions.collect { |s| s.id }.join(',') %>]">
           <input type="hidden" name="quantity" value="<%= @user.unpaid_submissions(se).count %>">
           <input type="hidden" name="amount" value="<%= @user.current_cost(se) %>">
-          <input type="hidden" name="notify_url" value="https://filmwin<%= "-staging" if ENVIRONMENT=='Staging' %>.herokuapp.com/order/new">
-          <input type="hidden" name="return" value="https://127.0.0.1:3000/users/<%= @user.id %>">
+          <input type="hidden" name="notify_url" value="https://filmwin<%= "-staging" if ENV['ENVIRONMENT']=='Staging' %>.herokuapp.com/order/new">
+          <input type="hidden" name="return" value="<%= user_url(@user) %>">
           <input type="hidden" name="env" value="www.sandbox">
           <input type="hidden" name="cmd" value="_xclick">
           <input type="hidden" name="business" value="ryanfreng-facilitator@gmail.com">

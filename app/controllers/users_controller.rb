@@ -66,9 +66,9 @@ class UsersController < ApplicationController
                                     :email, 
                                     :title,
                                     :company,
-                                    :mcai_member,
                                     :password, 
-                                    :password_confirmation)
+                                    :password_confirmation,
+                                    :user_type)
     end
 
     

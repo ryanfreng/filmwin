@@ -47,4 +47,5 @@ class OrdersController < ApplicationController
                             'Content-Length' => "#{raw.size}",
                             'User-Agent' => "My custom user agent"
                             ).body
+    end
 end

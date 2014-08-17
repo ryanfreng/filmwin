@@ -2,12 +2,13 @@ Filmwin::Application.routes.draw do
   resources :users
   resources :events
   resources :submissions
-  resources :orders, only: [:new, :create]
+  resources :orders, only: [:create]
   resources :categories, only: [:new, :create, :edit, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 
   root 'static_pages#home'
   match '/submissions/:id/upload(.:format)',  to: 'submissions#upload', via: 'get', as: :upload_submission
+  match '/orders/new',  to: 'orders#create',    via: 'post', as: :create_orders
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'

@@ -18,6 +18,9 @@ gem 'newrelic_rpm', '3.9.1.236'
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
+  gem 'guard-livereload', require: false
+  gem 'sass-rails-source-maps'
+  gem 'coffee-rails-source-maps'
   gem 'foreman', '0.74.0'
 end
 

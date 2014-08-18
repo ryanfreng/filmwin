@@ -1,57 +1,62 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section>    
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-  <div class="col-md-12">    
-    <% if @user.submissions.empty? -%><h1>Wave Awards 2014</h1><p class="text-center"><%= link_to "New Submission", '/submissions/new?id=1', class: "btn btn-lg btn-success" %></p><% end -%>
+  <div class="col-md-3 user-heading">
+    <%= gravatar_for @user %>
+    <h1 class="delta"><%= @user.name %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <% if @user.submissions.empty? -%><h2>Wave Awards 2014</h2><p class="text-center"><%= link_to "New Submission", '/submissions/new?id=1', class: "btn btn-lg btn-success" %></p><% end -%>
     <% @user.submission_events.each do |se| -%>
-    <div class="row">
-      <h1><%= link_to se.name, event_path(se) %></h1>      
-      <p class="text-center"><%= link_to "New Submission", new_submission_path(id: se.id), class: "btn btn-lg btn-success" %></p>
-      <% se.submissions.where(user: @user).each do |s| %>           
-      <div class="col-md-4">
-        <h3><%= s.title %> <small><%= link_to '', edit_submission_path(s), class: "glyphicon glyphicon-edit" %>
-          <%= link_to '', s, method: :delete, class: "glyphicon glyphicon-remove-circle", data: { confirm: "You sure?" } %></small></h3>
-        <h4><%= s.category.name %></h4>
-        
-        <% if s.order.nil? -%><div class="alert alert-warning"><small>Payment due for entry: $<%= @user.current_cost(se) %></small></div>
-        <% else -%><div class="alert alert-success"><small>Payment successful</small></div>
-        <% end -%>
-        <p>        
-        <% if s.upload_url && !s.upload_url.empty? -%>
-          <div class="alert alert-success">File uploaded successfully!<br /><%= link_to s.upload_url.match('\/([^\/]+$)')[1], s.upload_url %></div>
-        <% elsif s.video_url && !s.video_url.empty? -%>
-          <%= s.video_url %>
-        <% else -%>          
-          <%= form_for(s, html: { class: "directUpload" }) do |sub| %>
-            <div class="field">
-              <span class="btn btn-large btn-primary btn-file">Upload video<%= sub.file_field :upload_url %></span>
-            </div>
-
-            <%= sub.submit "Save entry", class: "btn btn-large btn-primary", style: "display: none;" %>
-          <% end %>
-        <% end -%>
-        </p>
-        <h4></h4>
-        <ul>
-          <li><strong>Role: </strong><%= s.user_role %></li>
-          <li><strong>Client: </strong><%= s.client %></li>
-          <li><strong>Budget: </strong><%= s.budget %></li>
-          <li><strong>Production Company: </strong><%= s.production_company %></li>
-          <li><strong>Producer: </strong><%= s.producer %></li>
-          <li><strong>Director: </strong><%= s.director %></li>
-          <li><strong>Cinematographer/Videographer: </strong><%= s.cinematographer %></li>
-          <li><strong>Editor: </strong><%= s.editor %></li>
-          <li><strong>Goals of Piece & Other Comments: </strong><%= s.comments_other %></li>
-        </ul>        
+    <div class="row event-submission-list">
+      <div class="col-md-3">
+        <h2 class="sidebar-heading"><%= link_to se.name, event_path(se) %></h2>      
+        <p><%= link_to "New Submission", new_submission_path(id: se.id), class: "btn btn-lg btn-success" %></p>
       </div>
-      <% end -%>
+      <div class="col-md-9">
+        <% se.submissions.where(user: @user).each_slice(2) do |slice| %>
+        <div class="row">
+          <% slice.each do |s| %>
+          <div class="col-sm-6 event-submission">
+            <h3><%= s.title %> <small><%= link_to '', edit_submission_path(s), class: "glyphicon glyphicon-edit" %>
+              <%= link_to '', s, method: :delete, class: "glyphicon glyphicon-remove-circle", data: { confirm: "You sure?" } %></small></h3>
+            <h4><%= s.category.name %></h4>
+            
+            <% if s.order.nil? -%><div class="alert alert-warning"><small>Payment due for entry: $<%= @user.current_cost(se) %></small></div>
+            <% else -%><div class="alert alert-success"><small>Payment successful</small></div>
+            <% end -%>
+            <p>        
+            <% if s.upload_url && !s.upload_url.empty? -%>
+              <div class="alert alert-success">File uploaded successfully!<br /><%= link_to s.upload_url.match('\/([^\/]+$)')[1], s.upload_url %></div>
+            <% elsif s.video_url && !s.video_url.empty? -%>
+              <%= s.video_url %>
+            <% else -%>          
+              <%= form_for(s, html: { class: "directUpload" }) do |sub| %>
+                <div class="field">
+                  <span class="btn btn-large btn-primary btn-file">Upload video<%= sub.file_field :upload_url %></span>
+                </div>
+
+                <%= sub.submit "Save entry", class: "btn btn-large btn-primary", style: "display: none;" %>
+              <% end %>
+            <% end -%>
+            </p>
+            <ul>
+              <li><strong>Role: </strong><%= s.user_role %></li>
+              <li><strong>Client: </strong><%= s.client %></li>
+              <li><strong>Budget: </strong><%= s.budget %></li>
+              <li><strong>Production Company: </strong><%= s.production_company %></li>
+              <li><strong>Producer: </strong><%= s.producer %></li>
+              <li><strong>Director: </strong><%= s.director %></li>
+              <li><strong>Cinematographer/Videographer: </strong><%= s.cinematographer %></li>
+              <li><strong>Editor: </strong><%= s.editor %></li>
+              <li><strong>Goals of Piece & Other Comments: </strong><%= s.comments_other %></li>
+            </ul>        
+          </div>
+          <% end -%>
+        </div>
+        <% end -%>
+      </div>
     </div>
     <div class="jumbotron">
       <p>

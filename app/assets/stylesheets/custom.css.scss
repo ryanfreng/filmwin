@@ -22,6 +22,12 @@ html {
 body {
   // padding-top: 10px;
   font-family: 'adelle-sans', sans-serif;
+
+  background-color: mix($gray-purple, $gray-orange);
+  background: image-url('bird.png') no-repeat left bottom,
+              -webkit-gradient(linear, left top, right bottom, from($gray-purple), to($gray-orange));
+  background: image-url('bird.png') no-repeat left bottom,
+              -webkit-linear-gradient(left top, $gray-purple, $gray-orange);
   background: image-url('bird.png') no-repeat left bottom,
               linear-gradient(to right bottom, $gray-purple, $gray-orange);
   background-size: 33.33% auto, auto auto;
@@ -49,42 +55,52 @@ textarea {
 
 /* typography */
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
+h1, h2, h3, h4, h5, h6,
+.alpha, .beta, .gamma, .delta, .epsilon, .zeta {
+  padding: 0;
+  border: 0;
+  margin: 20px 0;
+
   color: #fff;
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: left;
+  text-transform: none;
 }
 
-h1 {
-  font-family: 'kepler-std-display', serif;
-  font-size: 3em;
-  font-weight: 700;
+h1,
+.alpha {
+  margin-bottom: 30px;
+
+  font: 700 3em/1 'kepler-std-display', serif;
   letter-spacing: -2px;
-  margin-bottom: 30px;
   text-align: center;
 }
 
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: $gray-light;
+h2,
+.beta {
+  padding-left: 10px;
+  border-left: 1px solid white;
+  margin: 60px 0 30px;
+
+  font: 400 italic 1.5em/1 'kepler-std-display', serif;
+  text-transform: uppercase;
 }
 
-h3 {
+h3,
+.gamma {
   font: 700 2.5em/1.25 'kepler-std-display', serif;
 }
 
-h4 {
-  font-size: 1em;
-  font-weight: 700;
+h4,
+.delta {
+  font: 700 1em/1 'adelle-sans', sans-serif;
   text-transform: uppercase;
 }
 
 p {
-  font-size: 1.1em;
-  line-height: 1.7em;
+  // font-size: 1.1em;
+  line-height: 1.8571;
 }
 
 
@@ -167,6 +183,16 @@ aside {
   }
 }
 
+.user-heading {
+  float: left;
+
+  h1 {
+    float: left;
+
+    margin-top: 0;
+  }
+}
+
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -221,6 +247,60 @@ input {
   }
 }
 
+/* User Page */
+
+.sidebar-heading {
+  margin-top: 25px;
+  margin-bottom: 20px;
+  line-height: 1.25;
+
+  a {
+    color: #fff;
+
+    &:hover {
+      color: #428bca;
+      text-decoration: none;
+    }
+  }
+
+  @media (max-width: 991px) {
+    padding: 0 0 16px 0;
+    border-left: 0;
+    border-bottom: 4px solid #fff;
+    margin-bottom: 30px;
+
+    font-size: 2em;
+  }
+}
+
+.event-submission-list {
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.event-submission {
+
+  h3 {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #fff;
+
+    a {
+      color: rgb(51, 51, 51);
+      font-size: 16px;
+
+      &:hover {
+        color: #428bca;
+        text-decoration: none;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+}
 
 /* Nav */
 
@@ -243,16 +323,33 @@ input {
 
 /* jumbotron custom styles */
 .jumbotron {
-  background: image-url('event_bg.jpg') no-repeat center center;
-  background-size: cover;
+  background-color: $gray-lighter;
 
-  color: #fff;
+  color: rgb(51, 51, 51);
   text-align: center;
+
+  &.wave-bg {
+    margin: 50px 0;
+
+    background: image-url('event_bg.jpg') no-repeat center center;
+    background-size: cover;
+
+    color: #fff;
+  }
 }
 
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
+}
+
+.event-detail {
+  margin-bottom: 30px;
+
+  h3,
+  h4 {
+    text-align: center;
+  }
 }
 
 .progress {

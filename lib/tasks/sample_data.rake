@@ -39,11 +39,12 @@ namespace :db do
                         professions. We are also joining forces with the newly
                         created MCAI 30 second film festival and will be 
                         announcing the winners at the WAVEs.",
-                        entry_start_date: Date.today,
-                        entry_end_date:   60.days.from_now,
-                        show_date:        70.days.from_now,
-                        judging_date:     65.days.from_now,
-                        user_id:       admin.id)
+                        entry_start_date:     Date.today,
+                        entry_end_date:       60.days.from_now,
+                        show_date:            70.days.from_now,
+                        judging_date:         65.days.from_now,
+                        user_id:              admin.id,
+                        paypal_email_address: 'example@somewhere.com')
     
     p = Category.create!( name: 'Video Production',
                       description: "All the things we do", 

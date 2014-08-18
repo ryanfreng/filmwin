@@ -13,6 +13,7 @@ gem 'will_paginate', '3.0.7'
 #gem 'bootstrap-will_paginate', '0.0.9'
 gem 'will_paginate-bootstrap', '1.0.1'
 gem 'aws-sdk', '1.50.0'
+gem 'newrelic_rpm', '3.9.1.236'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'

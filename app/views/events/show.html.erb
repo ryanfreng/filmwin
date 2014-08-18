@@ -39,7 +39,7 @@
   </div>
 </div>
 <div class="container">
-<h1>Categories</h1>
+<h2>Categories</h2>
 <% if can_edit_event? -%>
   <div class="row">
   <div class="col-md-4 col-md-offset-4"><h2>New Category</h2>
@@ -57,8 +57,8 @@
   <% @event.parent_categories.sort { |x, y| y.children.count <=> x.children.count }.each do |p| -%>
   <div class="col-md-4">
     <h3><%= link_to("Edit", edit_category_path(p)) if can_edit_event? %> <%= p.name %></h3>
-    <p><%= p.description %></p>
-    <ul>
+    <p class="description"><%= p.description %></p>
+    <ul class="category-list">
     <% p.children.each do |c| -%>
       <li><h4><%= link_to("Edit", edit_category_path(c)) if can_edit_event? %> <%= c.name %></h4><%= c.description %></li>
     <% end -%>
@@ -68,11 +68,11 @@
 </div>
 
   <div class="col-md-6 col-md-offset-3">
-    <h1>Top Awards</h1>
-    <p>These will be awarded in addition to the category awards.</p>
-    <h3>Judges Favorite (3)</h3>
+    <h2>Top Awards</h2>
+    <p class="description">These will be awarded in addition to the category awards.</p>
+    <h4>Judges Favorite (3)</h4>
     <p>Each judge picks their favorite piece.</p>
-    <h3>Best in Show</h3>
+    <h4>Best in Show</h4>
     <p>The piece that stands above the rest.</p>
   </div>
 </div>

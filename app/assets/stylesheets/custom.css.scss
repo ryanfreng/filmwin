@@ -4,6 +4,8 @@
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
+$gray-purple: #b8b4bb;
+$gray-orange: #cebfb2;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -18,7 +20,12 @@ html {
 }
 
 body {
-  padding-top: 10px;
+  // padding-top: 10px;
+  font-family: 'adelle-sans', sans-serif;
+  background: image-url('bird.png') no-repeat left bottom,
+              linear-gradient(to right bottom, $gray-purple, $gray-orange);
+  background-size: 33.33% auto, auto auto;
+  background-attachment: fixed;
 }
 
 .navbar-static-top {
@@ -44,10 +51,13 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+  color: #fff;
 }
 
 h1 {
+  font-family: 'kepler-std-display', serif;
   font-size: 3em;
+  font-weight: 700;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
@@ -60,6 +70,16 @@ h2 {
   text-align: center;
   font-weight: normal;
   color: $gray-light;
+}
+
+h3 {
+  font: 700 2.5em/1.25 'kepler-std-display', serif;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 p {
@@ -161,6 +181,11 @@ input, textarea, select, .uneditable-input {
   @include box_sizing;
 }
 
+input[type=text],
+input[type=password] {
+  @extend .form-control;
+}
+
 input.btn {
   width: auto;
 }
@@ -178,8 +203,7 @@ input {
 }
 
 .field_with_errors {
-  @extend .control-group;
-  @extend .error;
+  @extend .has-error;
 }
 
 /* Users index */
@@ -197,12 +221,32 @@ input {
   }
 }
 
+
+/* Nav */
+
 .navbar-static-top {
+  border-bottom: 0;
   margin-bottom: 19px;
+
+  background-color: #fff;
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.dropdown-menu {
+  border: 0;
 }
 
 /* jumbotron custom styles */
 .jumbotron {
+  background: image-url('event_bg.jpg') no-repeat center center;
+  background-size: cover;
+
+  color: #fff;
   text-align: center;
 }
 
@@ -242,4 +286,27 @@ input {
     background: white;
     cursor: inherit;
     display: block;
+}
+
+/* catgories */
+
+.description {
+  padding: 12px 0 16px;
+  border-top: 4px solid white;
+  border-bottom: 2px solid white;
+  margin: 1em 0;
+
+  font: italic 1.25em/1.5 'adelle-sans', sans-serif;
+  color: #fff;
+}
+
+.category-list {
+  padding-left: 0;
+  margin: 1.5em 0;
+
+  list-style: none;
+
+  li {
+    margin-bottom: 1.25em;
+  }
 }

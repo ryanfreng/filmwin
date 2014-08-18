@@ -2,6 +2,7 @@ class Submission < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   belongs_to :event
+  belongs_to :order
 
   validates :title, presence: true
   validates :user, presence: true

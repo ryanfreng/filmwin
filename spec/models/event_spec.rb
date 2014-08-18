@@ -15,10 +15,11 @@ describe Event do
   it { should respond_to(:judging_date) }
   it { should respond_to(:user_id) }
   it { should respond_to(:parent_categories) }
+  it { should respond_to(:paypal_email_address) }
 
   it { should be_valid }
 
-  %w(name description user_id sub_heading).each do |n|
+  %w(name description user_id sub_heading paypal_email_address).each do |n|
     describe "when #{n} is not present" do
       before { event[n] = '' }
       it { should_not be_valid }

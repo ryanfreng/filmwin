@@ -18,8 +18,14 @@
 <%= s.label :user_role, "Role" %>
 <%= s.text_field :user_role, placeholder: "producer, editor, spectator", class: "form-control" %>
 
+<%= s.label :client %>
+<%= s.text_field :client, placeholder: "walt disney", class: "form-control" %>
+
 <%= s.label :director%>
 <%= s.text_field :director, placeholder: "spielberg", class: "form-control" %>
+
+<%= s.label :producer%>
+<%= s.text_field :producer, placeholder: "jj abrams", class: "form-control" %>
 
 <%= s.label :cinematographer, "Cinematographer/Videographer" %>
 <%= s.text_field :cinematographer, placeholder: "richard crudo", class: "form-control" %>
@@ -33,5 +39,5 @@
 <%= s.label :budget %>
 <%= s.text_field :budget, placeholder: "you mean like a number... on paper?", class: "form-control" %>
 
-<%= s.label :comments_other, "Other comments or details" %>
+<%= s.label :comments_other, "Goals of Piece & Other Comments" %>
 <%= s.text_area :comments_other, class: "form-control" %>

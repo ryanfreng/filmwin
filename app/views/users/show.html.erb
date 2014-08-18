@@ -8,22 +8,24 @@
       </h1>
     </section>
   </aside>
-  <div class="row">
-    <div class="col-md-4">
-      <h1>Submissions</h1>
-    </div>
-  </div>
   <div class="col-md-12">    
+    <% if @user.submissions.empty? -%><h1>Wave Awards 2014</h1><p class="text-center"><%= link_to "New Submission", '/submissions/new?id=1', class: "btn btn-lg btn-success" %></p><% end -%>
     <% @user.submission_events.each do |se| -%>
     <div class="row">
-      <h1><%= link_to se.name, event_path(se) %></h1>
-      <% @user.submissions(where: { event: se }).each do |s| %>
-      <div class="col-md-3 col-md-offset-1">
-        <h3><%= s.category.name %> <small><%= link_to '', edit_submission_path(s), class: "glyphicon glyphicon-edit" %>
+      <h1><%= link_to se.name, event_path(se) %></h1>      
+      <p class="text-center"><%= link_to "New Submission", new_submission_path(id: se.id), class: "btn btn-lg btn-success" %></p>
+      <% se.submissions.where(user: @user).each do |s| %>           
+      <div class="col-md-4">
+        <h3><%= s.title %> <small><%= link_to '', edit_submission_path(s), class: "glyphicon glyphicon-edit" %>
           <%= link_to '', s, method: :delete, class: "glyphicon glyphicon-remove-circle", data: { confirm: "You sure?" } %></small></h3>
-        <p>
+        <h4><%= s.category.name %></h4>
+        
+        <% if s.order.nil? -%><div class="alert alert-warning"><small>Payment due for entry: $<%= @user.current_cost(se) %></small></div>
+        <% else -%><div class="alert alert-success"><small>Payment successful</small></div>
+        <% end -%>
+        <p>        
         <% if s.upload_url && !s.upload_url.empty? -%>
-          File: <%= s.upload_url.match('\/([^\/]+$)')[1] %>
+          <div class="alert alert-success">File uploaded successfully!<br /><%= link_to s.upload_url.match('\/([^\/]+$)')[1], s.upload_url %></div>
         <% elsif s.video_url && !s.video_url.empty? -%>
           <%= s.video_url %>
         <% else -%>          
@@ -36,20 +38,47 @@
           <% end %>
         <% end -%>
         </p>
-        <h4><%= s.title %></h4>
+        <h4></h4>
         <ul>
           <li><strong>Role: </strong><%= s.user_role %></li>
           <li><strong>Client: </strong><%= s.client %></li>
           <li><strong>Budget: </strong><%= s.budget %></li>
           <li><strong>Production Company: </strong><%= s.production_company %></li>
+          <li><strong>Producer: </strong><%= s.producer %></li>
           <li><strong>Director: </strong><%= s.director %></li>
           <li><strong>Cinematographer/Videographer: </strong><%= s.cinematographer %></li>
           <li><strong>Editor: </strong><%= s.editor %></li>
-        </ul>
+          <li><strong>Goals of Piece & Other Comments: </strong><%= s.comments_other %></li>
+        </ul>        
       </div>
       <% end -%>
     </div>
-    <% end -%>
+    <div class="jumbotron">
+      <p>
+      <% unpaid_submissions = @user.unpaid_submissions(se) -%>
+      <% if unpaid_submissions.count > 0 -%>
+        <form method="post" action="<%= ENV['PAYPAL_ADDRESS'] %>" class="" target="_top">
+          <div class="hide" id="errorBox"></div>
+          <input type="hidden" name="button" value="buynow">
+          <input type="hidden" name="item_name" value="Wave Awards, <%= pluralize(@user.unpaid_submissions(se).count, 'Entry') %>: <%= unpaid_submissions.collect { |s| s.title }.join(',') %>, ids=[<%= unpaid_submissions.collect { |s| s.id }.join(',') %>]">
+          <input type="hidden" name="quantity" value="<%= @user.unpaid_submissions(se).count %>">
+          <input type="hidden" name="amount" value="<%= @user.current_cost(se) %>">
+          <input type="hidden" name="notify_url" value="<%= create_orders_url %>">
+          <input type="hidden" name="return" value="<%= user_url(@user) %>">
+          <input type="hidden" name="env" value="www.sandbox">
+          <input type="hidden" name="cmd" value="_xclick">
+          <input type="hidden" name="business" value="ryanfreng-facilitator@gmail.com">
+          <input type="hidden" name="bn" value="JavaScriptButton_buynow">
+          <button type="submit" class="btn btn-large btn-success">Finish and Pay</button></form>
+
+      <% else -%>
+        <h3 class="alert alert-success">Your all done! Your submissions and payment were successful! Sit back and relax</h3> 
+      <% end -%> 
+      </p>
+    </div> 
+    <% end -%> 
+  </div>
+  <div>
   </div>
 </div>
 

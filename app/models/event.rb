@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :user
-  has_many  :submissions
-  has_many  :categories
+  has_many  :submissions, dependent: :destroy
+  has_many  :categories, dependent: :destroy
   validates :name,  presence: true, length: { maximum: 50 }, 
             uniqueness: { case_sensitive: false }
   validates :description,  presence: true, length: { maximum: 1000 }
@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   validates :judging_date,  presence: true
   validates :show_date,  presence: true
   validates :user_id, presence: true
+  validates :paypal_email_address, presence: true
 
   def parent_categories 
     categories.where(parent_id: nil).to_a

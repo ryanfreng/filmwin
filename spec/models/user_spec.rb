@@ -16,7 +16,8 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
-  it { should respond_to(:mcai_member) }
+  it { should_not respond_to(:mcai_member) }
+  it { should respond_to(:user_type)}
   it { should respond_to(:title) }
   it { should respond_to(:company) }
   it { should respond_to(:admin) }

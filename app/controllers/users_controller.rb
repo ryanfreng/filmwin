@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user,  only: [:edit, :update, :destroy, :show]
-  before_action :correct_user_or_admin,    only: [:edit, :update, :show, :submissions]
+  before_action :signed_in_user,            only: [:index, :edit, :update, :destroy, :show, :submissions]
+  before_action :correct_user_or_admin,     only: [:edit, :update, :destroy, :show, :submissions]
   before_action :admin_user,      only: [:index, :destroy]
   before_action :redirect_root_if_signed_in, only: [:new, :create]
 
@@ -11,6 +11,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201, acl: :public_read)
+    if params.has_key?(:st)
+      status = params[:st]
+      if status == "Completed"
+        flash[:success] = "Payment successful"
+      else
+        flash[:error] = "Payment issue: #{status}"
+      end
+    end
   end
 
   def submissions
@@ -58,9 +66,9 @@ class UsersController < ApplicationController
                                     :email, 
                                     :title,
                                     :company,
-                                    :mcai_member,
                                     :password, 
-                                    :password_confirmation)
+                                    :password_confirmation,
+                                    :user_type)
     end
 
     

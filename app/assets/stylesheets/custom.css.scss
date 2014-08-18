@@ -243,3 +243,11 @@ input {
     cursor: inherit;
     display: block;
 }
+
+.padding-top {
+  padding-top: $padding-base-vertical;
+}
+
+.padding-bottom {
+  padding-bottom: $padding-base-vertical;
+}

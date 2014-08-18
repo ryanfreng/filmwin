@@ -139,7 +139,7 @@ describe "User pages" do
       it { should have_content("Update your profile") }
       it { should have_title("Edit user") }
       it { should have_link('change', href: 'http://gravatar.com/emails') }
-      it { should have_content('MCAI Member') }
+      it { should have_content('Membership') }
       it { should have_content('Title') }
       it { should have_content('Company') }
     end
@@ -204,24 +204,6 @@ describe "User pages" do
       it { should have_selector('#user_email', user.email) }
       it { should have_selector('#user_title', user.title) }
       it { should have_selector('#user_company', user.company) }
-
-      describe "is an mcai member" do
-        it { should have_selector("#user_mcai_member_true[checked='checked']")}
-        it { should_not have_unchecked_field("#user_mcai_member_true") }
-        it { should have_no_checked_field("#user_mcai_member_false") }
-      end
-
-      describe "when not an mcai member" do
-        let(:non_member) { FactoryGirl.create(:user, mcai_member: false) }
-        before do
-          sign_in non_member
-          visit edit_user_path(non_member)
-        end
-
-        it { should have_selector("#user_mcai_member_false[checked='checked']")}
-        it { should_not have_unchecked_field("#user_mcai_member_false") }
-        it { should have_no_checked_field("#user_mcai_member_true") }
-      end
 
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811095650) do
+ActiveRecord::Schema.define(version: 20140817043816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,25 @@ ActiveRecord::Schema.define(version: 20140811095650) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "sub_heading"
+    t.string   "paypal_email_address"
+  end
+
+  create_table "orders", force: true do |t|
+    t.datetime "payment_date"
+    t.string   "email"
+    t.string   "verify_sign"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address_city"
+    t.string   "address_name"
+    t.string   "address_state"
+    t.string   "address_street"
+    t.string   "address_zip"
+    t.string   "payment_gross"
+    t.string   "payment_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "txn_id"
   end
 
   create_table "submissions", force: true do |t|
@@ -56,6 +75,15 @@ ActiveRecord::Schema.define(version: 20140811095650) do
     t.string   "producer"
     t.string   "cinematographer"
     t.string   "upload_url"
+    t.integer  "order_id"
+  end
+
+  create_table "user_types", force: true do |t|
+    t.string   "name"
+    t.integer  "earlybird_cost"
+    t.integer  "standard_cost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -66,9 +94,9 @@ ActiveRecord::Schema.define(version: 20140811095650) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
-    t.boolean  "mcai_member",     default: false
     t.string   "title"
     t.string   "company"
+    t.integer  "user_type_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -68,7 +68,7 @@ class UsersController < ApplicationController
                                     :company,
                                     :password, 
                                     :password_confirmation,
-                                    :user_type)
+                                    :user_type_id)
     end
 
     

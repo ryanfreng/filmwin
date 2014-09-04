@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def current_cost(event)
-    if Date.today < (event.entry_start_date + 3.weeks)
+    if Date.today < (event.entry_start_date + 3.weeks + 5.days)
       user_type.earlybird_cost
     else
       user_type.standard_cost

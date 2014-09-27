@@ -9,7 +9,13 @@
   <p class="lead">
     <%= @event.sub_heading %>
   </p>
+  <% if @event.entry_start_date <= Date.today && @event.entry_end_date >= Date.today -%>
   <p><%= link_to "Enter now!", new_submission_path(id: @event.id), class: "btn btn-lg btn-success" %></p>
+  <% elsif @event.entry_start_date > Date.today -%>
+  <p><%= link_to "Entry not open yet!", '#', class: "btn btn-lg btn-primary" %></p>
+  <% else -%>
+  <p><%= link_to "Entry closed!", '#', class: "btn btn-lg btn-primary" %></p>
+  <% end -%>
 </div>
 <div class="row">
   <p class="col-md-8 col-md-offset-2">

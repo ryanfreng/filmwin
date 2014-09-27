@@ -7,7 +7,12 @@ class SubmissionsController < ApplicationController
     @event = Event.find(params[:id])
     @submission = Submission.new
     # redirect to last place if no ID
-    redirect_back_or if @event.nil?
+    if @event.nil?
+      redirect_back_or home
+    elsif @event.entry_start_date > Date.today or @event.entry_end_date < Date.today
+      flash[:error] = "Event not open for submissions."
+      redirect_back_or home
+    end
   end
 
   def create
@@ -16,7 +21,6 @@ class SubmissionsController < ApplicationController
     if @submission.save
       flash[:success] = "Submission successful! Make sure to pay when you're done!"
       redirect_to user_path(current_user) #event_path(@submission.event)
-      #redirect_back_or
     else
       @event = Event.find(submission_params[:event_id])
       render "new"

@@ -11,8 +11,10 @@
     <% @user.submission_events.each do |se| -%>
     <div class="row event-submission-list">
       <div class="col-md-3">
-        <h2 class="sidebar-heading"><%= link_to se.name, event_path(se) %></h2>      
+        <h2 class="sidebar-heading"><%= link_to se.name, event_path(se) %></h2>    
+        <% if se.entry_start_date <= Date.today && se.entry_end_date >= Date.today -%>  
         <p><%= link_to "New Submission", new_submission_path(id: se.id), class: "btn btn-lg btn-success" %></p>
+        <% end -%>
       </div>
       <div class="col-md-9">
         <% se.submissions.where(user: @user).each_slice(2) do |slice| %>
@@ -65,7 +67,7 @@
         <form method="post" action="<%= ENV['PAYPAL_ADDRESS'] %>" class="" target="_top">
           <div class="hide" id="errorBox"></div>
           <input type="hidden" name="button" value="buynow">
-          <input type="hidden" name="item_name" value="Wave Awards, <%= pluralize(@user.unpaid_submissions(se).count, 'Entry') %>: <%= unpaid_submissions.collect { |s| s.title }.join(',') %>, ids=[<%= unpaid_submissions.collect { |s| s.id }.join(',') %>]">
+          <input type="hidden" name="item_name" value="Wave Awards, <%= pluralize(@user.unpaid_submissions(se).count, 'Entry') %>: ids=[<%= unpaid_submissions.collect { |s| s.id }.join(',') %>]">
           <input type="hidden" name="quantity" value="<%= @user.unpaid_submissions(se).count %>">
           <input type="hidden" name="amount" value="<%= @user.current_cost(se) %>">
           <input type="hidden" name="notify_url" value="<%= create_orders_url %>">

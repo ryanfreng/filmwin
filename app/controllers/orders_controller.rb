@@ -24,11 +24,14 @@ class OrdersController < ApplicationController
                   payment_gross: params[:payment_gross],
                   payment_status: params[:payment_status],
                   payment_date: params[:payment_date])
-        if order.save
-          submissions = Submission.find(/ids=\[(.*)\]/.match(params[:item_name])[1].split(',') )
+        has_ids = /ids=\[(.*)\]/.match(params[:item_name])
+        if has_ids && order.save
+          submissions = Submission.find(has_ids[1].split(',') )
           submissions.each do |s|
             s.update_attributes(order: order)
           end
+        else
+          logger.info("Order successful, paypal IPN buffer overflow")
         end
 
       when "INVALID"

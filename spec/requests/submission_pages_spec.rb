@@ -124,8 +124,7 @@ describe 'Submission Pages' do
     let(:users)       { FactoryGirl.create_list(:user, 5) }
     let(:event)       { FactoryGirl.create(:event) }
     let(:categories)  { FactoryGirl.create_list(:category, 15, event_id: event.id) }
-    let(:submissions) { FactoryGirl.create_list(  :submission_ru, 
-                                                  70, event_id: event.id )} 
+    let(:submissions) { FactoryGirl.create_list(  :submission_ru, 70, event_id: event.id ) } 
 
     before do
       sign_in admin

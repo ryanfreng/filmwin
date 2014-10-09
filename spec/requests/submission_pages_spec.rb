@@ -119,4 +119,29 @@ describe 'Submission Pages' do
 
   end
 
+  describe "show" do
+    let(:admin)       { FactoryGirl.create(:admin) }
+    let(:users)       { FactoryGirl.create_list(:user, 5) }
+    let(:event)       { FactoryGirl.create(:event) }
+    let(:categories)  { FactoryGirl.create_list(:category, 15, event_id: event.id) }
+    let(:submissions) { FactoryGirl.create_list(  :submission, 
+                                                  70, 
+                                                  user_id: users[rand(users.size)-1].id, 
+                                                  category_id: categories[rand(categories.size)-1].id,
+                                                  event_id: event.id )} 
+
+    before do
+      sign_in admin
+      visit submission_event_path(event.id)
+    end
+
+    describe "list of submissions" do
+      it { should have_content("Submissions for #{event.name}")}
+      it { should have_content(submissions[rand(submissions.size)-1].title )}
+
+    end
+
+
+  end
+
 end

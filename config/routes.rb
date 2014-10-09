@@ -8,6 +8,7 @@ Filmwin::Application.routes.draw do
 
   root 'static_pages#home'
   match '/submissions/:id/upload(.:format)',  to: 'submissions#upload', via: 'get', as: :upload_submission
+  match '/events/:id/submissions', to: 'events#submissions', via: 'get', as: :submission_event
   match '/orders/new',  to: 'orders#create',    via: 'post', as: :create_orders
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

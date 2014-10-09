@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :signed_in_user,  only: [:new, :edit, :update]
+  before_action :signed_in_user,  only: [:new, :edit, :update, :submissions]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :admin_user, only: [:new, :create]
+  before_action :admin_user, only: [:new, :create, :submissions]
 
   def new
     redirect_to root_url
@@ -40,6 +40,12 @@ class EventsController < ApplicationController
       @event = Event.first
       @new_category = Category.new if can_edit_event?
     end
+  end
+
+  def submissions
+    @event = Event.find(params[:id])
+    @submissions = @event.submissions
+    @submissions.sort_by { | sub | sub.user.name }
   end
 
   private

@@ -1,5 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :signed_in_user
+  before_action :admin_user,              only: [:show]
   before_action :can_edit_submission,     only: [:edit, :update, :destroy]
   before_action :store_location,          only: [:new]
 

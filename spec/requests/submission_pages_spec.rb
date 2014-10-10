@@ -124,7 +124,11 @@ describe 'Submission Pages' do
     let(:users)       { FactoryGirl.create_list(:user, 5) }
     let(:event)       { FactoryGirl.create(:event) }
     let(:categories)  { FactoryGirl.create_list(:category, 15, event_id: event.id) }
-    let(:submissions) { FactoryGirl.create_list(  :submission_ru, 70, event_id: event.id ) } 
+    #let(:submissions) { FactoryGirl.create_list(  :submission_ru, 70, event_id: event.id ) }
+    let(:submissions) { FactoryGirl.create_list( :submission, 70, 
+      category_id: categories.sample.id,
+      user_id: users.sample.id,
+      event_id: event.id ) }
 
     before do
       sign_in admin
@@ -132,8 +136,11 @@ describe 'Submission Pages' do
     end
 
     describe "list of submissions" do
-      it { should have_content("Submissions for #{event.name}")}
-      it { should have_content(submissions[rand(submissions.size)-1].title )}
+      it { should have_content("Submissions for #{event.name}")}      
+      it { should have_content("Help")}      
+      #it { should have_content(submissions.sample.title)}
+      it { should have_content(submissions.count) }
+      it { should have_content(submissions.sample.title) } 
 
     end
 

@@ -1,5 +1,5 @@
 <% provide(:title, @event.name + " Submissions") %>
-<h1>Submissions for <%= @event.name %></h1>
+<h1><%= @submissions.count %> Submissions for <%= @event.name %></h1>
 
 <table class="table table-hover">
   <thead>

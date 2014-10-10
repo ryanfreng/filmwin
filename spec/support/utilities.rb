@@ -13,3 +13,14 @@ def sign_in(user, options={})
     click_button "Sign in"
   end
 end
+
+def random_sample(the_class, option={})
+  #only handles one option
+  if the_class.class == Class
+    if option.size > 0 
+      the_class.where(option.first[0] => option.first[1]).offset(rand(the_class.count)).first
+    else
+      the_class.offset(rand(the_class.count)).first
+    end
+  end
+end

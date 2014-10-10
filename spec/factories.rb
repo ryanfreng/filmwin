@@ -65,10 +65,10 @@ FactoryGirl.define do
     video_url           { "https://www.youtube.com/watch?v=XyjvCRowFrM"}
     comments_other      { Faker::Lorem::sentence(4) }
     order
-    factory :submission_ru do
-      category          { self.event.categories.sort_by{ rand}.first }
-      user              { Users.all.sort_by{ rand }.first }
-    end
+    #factory :submission_ru do
+    #  category          { random_sample(Category, event_id: self.event.id) }
+    #  user              { random_sample(User) }
+    #end
   end
 
 

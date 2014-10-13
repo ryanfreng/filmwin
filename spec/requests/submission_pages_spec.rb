@@ -120,31 +120,51 @@ describe 'Submission Pages' do
   end
 
   describe "show" do
-    let(:admin)       { FactoryGirl.create(:admin) }
-    let(:users)       { FactoryGirl.create_list(:user, 5) }
-    let(:event)       { FactoryGirl.create(:event) }
-    let(:categories)  { FactoryGirl.create_list(:category, 15, event_id: event.id) }
-    #let(:submissions) { FactoryGirl.create_list(  :submission_ru, 70, event_id: event.id ) }
-    let(:submissions) { FactoryGirl.create_list( :submission, 70, 
-      category_id: categories.sample.id,
-      user_id: users.sample.id,
-      event_id: event.id ) }
+    let!(:admin)       { FactoryGirl.create(:admin) }
+    let!(:users)       { FactoryGirl.create_list(:user, 5) }    
+    let!(:event)       { FactoryGirl.create(:event, user: admin) }
+    let!(:categories)  { FactoryGirl.create_list(:category, 15, event: event) }
+    let!(:submissions) { FactoryGirl.create_list( :submission, 70, 
+                          category: categories.sample,
+                          user: users.sample,
+                          event: event ) }
 
     before do
       sign_in admin
       visit submission_event_path(event.id)
     end
 
-    describe "list of submissions" do
-      it { should have_content("Submissions for #{event.name}")}      
-      it { should have_content("Help")}      
-      #it { should have_content(submissions.sample.title)}
-      it { should have_content(submissions.count) }
-      it { should have_content(submissions.sample.title) } 
-
-    end
-
+    it { should have_content("Submissions for #{event.name}") }      
+    it { should have_content("Help") } 
+    it { should have_content(event.categories.count) }   
+    it { should have_content(submissions.sample.title) }
+    it { should have_content(event.submissions.count) }
+    it { should have_content(submissions.sample.title) } 
 
   end
+
+  # describe "show" do
+  #   let!(:admin)       { FactoryGirl.create(:admin) }
+  #   let!(:user)       { FactoryGirl.create(:user) }    
+  #   let!(:event)       { FactoryGirl.create(:event, user_id: admin.id) }
+  #   let!(:category)  { FactoryGirl.create(:category, event_id: event.id) }
+  #   let!(:submission) { FactoryGirl.create( :submission, 
+  #                           category_id: category.id,
+  #                           user_id: user.id,
+  #                           event_id: event.id ) }
+
+  #   before do
+  #     sign_in admin
+  #     visit submission_event_path(event.id)
+  #   end
+
+  #   it { should have_content("Submissions for #{event.name}") }      
+  #   it { should have_content("Help") } 
+  #   it { should have_content(event.categories.count) }   
+  #   #it { should have_content(submissions.sample.title) }
+  #   it { should have_content(event.submissions.count) }
+  #   it { should have_content(submission.title) } 
+
+  # end
 
 end

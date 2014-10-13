@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   def submissions
     @event = Event.find(params[:id])
     @submissions = @event.submissions
-    @submissions.sort_by! { | sub | sub.category.name }
+    @submissions = @submissions.sort_by { | sub | sub.category.name }
   end
 
   private

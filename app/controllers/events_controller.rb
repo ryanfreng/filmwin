@@ -46,6 +46,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @submissions = @event.submissions
     @submissions = @submissions.sort_by { | sub | sub.category.name }
+    respond_to do |format|
+      format.html
+      format.xlsx
+    end
   end
 
   private

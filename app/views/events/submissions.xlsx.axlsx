@@ -1,0 +1,33 @@
+
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Submissions") do |sheet|
+  sheet.add_row [ 'Category', 
+                  'Submission',
+                  'User', 
+                  'Title', 
+                  'Client', 
+                  'Budget', 
+                  'Production Company', 
+                  'Director', 
+                  'Editor', 
+                  'Producer', 
+                  'Cinematographer', 
+                  'Video',
+                  'Comments' ]
+  @submissions.each do |sub|
+    video = !sub.video_url.blank? ? sub.video_url : !sub.upload_url.blank? ? sub.upload_url : 'No video'
+    sheet.add_row [ sub.category.name, 
+                    sub.id,
+                    sub.user.name, 
+                    sub.title,
+                    sub.client,
+                    sub.budget,
+                    sub.production_company,
+                    sub.director,
+                    sub.editor,
+                    sub.producer,
+                    sub.cinematographer,
+                    video,
+                    sub.comments_other], :types => [nil, :string]    
+  end
+end

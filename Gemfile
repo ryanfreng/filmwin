@@ -26,13 +26,13 @@ group :development, :test do
 end
 
 group :test do
-  gem 'selenium-webdriver', '2.35.1'
+  gem 'selenium-webdriver', '~> 2.43.0'
   gem 'capybara', '2.1.0'
   gem 'capybara-bootstrap-datepicker', '0.0.7'
   gem 'growl', '1.0.3'
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.0'
-  gem 'childprocess', '0.3.6'
+  gem 'childprocess', '~> 0.5.5'
 end
 
 gem 'sass-rails', '~> 4.0.1'
@@ -41,6 +41,9 @@ gem 'coffee-rails', '~> 4.0.1'
 gem 'jquery-rails', '3.0.4'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '~> 1.0.2'
+#gem 'axlsx', '~> 2.0.1'
+#gem 'acts_as_xlsx', '~> 1.0.6'
+gem 'axlsx_rails', '~> 0.2.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

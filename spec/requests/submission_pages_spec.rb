@@ -143,28 +143,4 @@ describe 'Submission Pages' do
 
   end
 
-  # describe "show" do
-  #   let!(:admin)       { FactoryGirl.create(:admin) }
-  #   let!(:user)       { FactoryGirl.create(:user) }    
-  #   let!(:event)       { FactoryGirl.create(:event, user_id: admin.id) }
-  #   let!(:category)  { FactoryGirl.create(:category, event_id: event.id) }
-  #   let!(:submission) { FactoryGirl.create( :submission, 
-  #                           category_id: category.id,
-  #                           user_id: user.id,
-  #                           event_id: event.id ) }
-
-  #   before do
-  #     sign_in admin
-  #     visit submission_event_path(event.id)
-  #   end
-
-  #   it { should have_content("Submissions for #{event.name}") }      
-  #   it { should have_content("Help") } 
-  #   it { should have_content(event.categories.count) }   
-  #   #it { should have_content(submissions.sample.title) }
-  #   it { should have_content(event.submissions.count) }
-  #   it { should have_content(submission.title) } 
-
-  # end
-
 end

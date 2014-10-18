@@ -4,6 +4,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th class="col-md-1">Entry</th>
       <th class="col-md-1">User</th>
       <th class="col-md-1">Category</th>
       <th class="col-md-1">Title</th>
@@ -15,6 +16,9 @@
   </thead>
   <% @submissions.each do |sub| %>
   <tr<% if sub.order.nil? -%> class="danger"<% end -%>>
+    <td>
+      <%= sub.id %>
+    </td>
     <td>
       <%= sub.user.name %>
     </td>

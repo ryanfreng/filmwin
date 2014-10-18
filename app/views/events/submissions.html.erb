@@ -34,8 +34,8 @@
       <%= sub.production_company %>
     </td>
     <td>
-      <% if sub.video_url -%><%= sub.video_url %>
-      <% elsif sub.upload_url -%><%= link_to s.upload_url.match('\/([^\/]+$)')[1], s.upload_url %>
+      <% if !sub.video_url.blank? -%><%= sub.video_url %>
+      <% elsif !sub.upload_url.blank? -%><%= link_to sub.upload_url.match('\/([^\/]+$)')[1], sub.upload_url %>
       <% else -%>No video<% end -%>      
 
       <% %w(director editor producer cinematographer).each do |field| -%>

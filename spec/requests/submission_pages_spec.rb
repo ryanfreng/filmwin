@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Submission Pages' do
   
-  let(:submission)  { FactoryGirl.create(:submission) }
+  let!(:submission)  { FactoryGirl.create(:submission) }
 
   subject { page }
 
@@ -53,9 +53,9 @@ describe 'Submission Pages' do
   end
 
   describe "new" do
-    let(:user)      { FactoryGirl.create(:user) }
-    let(:event)     { submission.event }
-    let(:category)  { submission.category }
+    let!(:user)      { FactoryGirl.create(:user) }
+    let!(:event)     { submission.event }
+    let!(:category)  { submission.category }
     let(:submit)    { "Submit entry" }
     before do
       sign_in user
@@ -81,14 +81,17 @@ describe 'Submission Pages' do
     end
 
     # describe "with valid information" do
-    #   let(:title) { "Boom shakalaka" }
+    #   let!(:title) { "Boom shakalaka" }    
     #   before do
     #     fill_in "Title",              with: title
     #     fill_in "Video url",          with: "https://www.youtube.com/watch?v=XyjvCRowFrM"
     #     fill_in "Role",               with: "awesomesauce"
     #     fill_in "Production company", with: "Backflip Films"
     #     fill_in "Budget",             with: "10k"   
-    #     select first('#submission_category_id option')
+    #     #select first('#submission_category_id option').text, from: 'submission_category_id'
+    #     #select category.name, from: 'submission_category_id'
+    #     option = first('#submission_category_id option').text
+    #     select option, from: 'submission_category_id'
     #   end
 
     #   it "should create a submission" do
@@ -100,8 +103,10 @@ describe 'Submission Pages' do
     #       click_button submit
     #     end
 
+    #     it { should have_content(category.name) }
     #     it { should have_content(event.name) }
     #     it { should have_selector("div.alert.alert-success") }
+    #     it { should_not have_selector("div.alert.alert-success") }
     #     it { should have_content('Finish and pay') }
     #     it { should_not have_content('Upload video') }
     #   end

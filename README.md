@@ -17,8 +17,8 @@ Make sure to set the following environment variables in a .env file for foreman:
 S3_BUCKET=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
-PAYPAL_ADDRESS=
-ENVIRONMENT=
+PAYPAL_ADDRESS=<email@domain.com>
+ENVIRONMENT=<production|development|test>
 ````
 
 Running

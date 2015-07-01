@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   before_action :admin_user, only: [:new, :create, :submissions]
 
   def new
-    redirect_to root_url
-    # @event = Event.new
+    #redirect_to root_url
+    @event = Event.new
   end
 
   def create

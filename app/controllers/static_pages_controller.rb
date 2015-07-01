@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @event = Event.first
+    @event = Event.find(2)
     if @event
       redirect_to @event
     end

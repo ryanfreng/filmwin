@@ -30,13 +30,13 @@ describe Category do
     it { should_not be_valid }
   end
 
-  describe "when name is already taken" do
-    before do
-      @same_category = category.dup
-      @same_category.description = 'new thing'
-      @same_category.save
-    end
-    specify { expect(@same_category).not_to be_valid }
-  end
+  # describe "when name is already taken" do
+  #   before do
+  #     @same_category = category.dup
+  #     @same_category.description = 'new thing'
+  #     @same_category.save
+  #   end
+  #   specify { expect(@same_category).not_to be_valid }
+  # end
 
 end

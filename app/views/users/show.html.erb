@@ -7,7 +7,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <% if @user.submissions.empty? -%><h2>Wave Awards 2014</h2><p class="text-center"><%= link_to "New Submission", '/submissions/new?id=1', class: "btn btn-lg btn-success" %></p><% end -%>
+    <% if @user.submissions.empty? -%><h2>Wave Awards 2015</h2><p class="text-center"><%= link_to "New Submission", '/submissions/new?id=2', class: "btn btn-lg btn-success" %></p><% end -%>
     <% @user.submission_events.each do |se| -%>
     <div class="row event-submission-list">
       <div class="col-md-3">

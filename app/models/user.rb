@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     self.submissions.each do |s|
       se.push(s.event) unless se.include?(s.event)
     end
-    se
+    se.sort {|a, b| b.show_date <=> a.show_date }
   end
 
   def unpaid_submissions

@@ -3,6 +3,6 @@
 <% @events.each do |e| %>
 <h2><%= e.name %></h2>
 <ul>
-  <%= render partial: 'category', collection: e.categories %>
+  <%= render partial: 'category', collection: e.categories.sort_by { |category| category.submissions.count }.reverse %>
 </ul>
 <% end %>

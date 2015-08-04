@@ -3,7 +3,7 @@ class AdminController < ApplicationController
   before_action :admin_user,      only: [:index]
 
   def index
-    @categories = Category.all.sort_by { |category| category.submissions.count }.reverse
+    @events = Event.all
   end
 
 end

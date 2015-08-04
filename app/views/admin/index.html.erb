@@ -1,6 +1,8 @@
 <% provide(:title, 'Event Data') %>
 <h1>Event Data</h1>
-
+<% @events.each do |e| %>
+<h2><%= e.title %></h2>
 <ul>
-  <%= render partial: 'category', collection: @categories %>
+  <%= render partial: 'category', collection: e.categories %>
 </ul>
+<% end %>

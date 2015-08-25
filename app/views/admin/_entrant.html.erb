@@ -1,0 +1,9 @@
+<li>
+  <%= link_to entrant.name, entrant %> |
+  <%= entrant.email %>
+  <%= entrant.submissions.where("submissions.event_id=#{event.id}").count %>
+  <% if current_user.admin? && !current_user?(entrant) %>
+    | <%= link_to "delete", entrant, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

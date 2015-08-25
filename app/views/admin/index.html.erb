@@ -1,8 +1,21 @@
 <% provide(:title, 'Event Data') %>
 <h1>Event Data</h1>
 <% @events.each do |e| %>
-<h2><%= e.name %></h2>
-<ul>
-  <%= render partial: 'category', collection: e.categories.sort_by { |category| category.submissions.count }.reverse %>
-</ul>
+<div class="row">
+  <div class="col-md-12">
+    <h2><%= e.name %></h2>
+  </div>
+  <div class="col-md-6">
+    <h3>Categories</h3>
+    <ul>
+      <%= render partial: 'category', collection: e.categories.sort_by { |category| category.submissions.count }.reverse %>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3>Entrants</h3>
+    <ul>
+      <%= render partial: 'entrant', collection: e.entrants.sort_by {|entrant| entrant.submissions.where("event_id=#{e.id}").count }.reverse, locals: { event: e } %>
+    </ul>
+  </div>
+</div>
 <% end %>

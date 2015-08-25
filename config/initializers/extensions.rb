@@ -1,0 +1,1 @@
+require "active_record_has_many_through_patch"

@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many  :submissions, dependent: :destroy
   has_many  :categories, dependent: :destroy
+  has_many  :entrants,through: :submissions, source: :user, uniq: true
   validates :name,  presence: true, length: { maximum: 50 }, 
             uniqueness: { case_sensitive: false }
   validates :description,  presence: true, length: { maximum: 1000 }

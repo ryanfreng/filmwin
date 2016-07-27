@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140817043637) do
+ActiveRecord::Schema.define(version: 20160727212412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,28 @@ ActiveRecord::Schema.define(version: 20140817043637) do
     t.string   "txn_id"
   end
 
+  create_table "submission_costs", force: true do |t|
+    t.integer  "standard"
+    t.integer  "earlybird"
+    t.integer  "submission_quantity_id"
+    t.integer  "user_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "submission_costs", ["submission_quantity_id"], name: "index_submission_costs_on_submission_quantity_id", using: :btree
+  add_index "submission_costs", ["user_type_id"], name: "index_submission_costs_on_user_type_id", using: :btree
+
+  create_table "submission_quantities", force: true do |t|
+    t.integer  "beginning_value"
+    t.integer  "end_value"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "submission_quantities", ["event_id"], name: "index_submission_quantities_on_event_id", using: :btree
+
   create_table "submissions", force: true do |t|
     t.integer  "user_id"
     t.integer  "event_id"
@@ -93,10 +115,13 @@ ActiveRecord::Schema.define(version: 20140817043637) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",             default: false
     t.string   "title"
     t.string   "company"
     t.integer  "user_type_id"
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

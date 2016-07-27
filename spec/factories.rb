@@ -67,5 +67,18 @@ FactoryGirl.define do
     order
   end
 
+  factory :submission_quantity do
+    sequence(:beginning_value)  { |n| n*4-3 }
+    sequence(:end_value)        { |n| n*4 }
+    event
+  end
+
+  factory :submission_cost do
+    standard      65
+    earlybird     55
+    submission_quantity
+    user_type
+  end
+
 
 end

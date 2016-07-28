@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   has_many  :submissions, dependent: :destroy
   has_many  :categories, dependent: :destroy
   has_many  :entrants, -> { uniq }, through: :submissions, source: :user
-  has_many  :submission_quantities, dependent: :destroy
+  has_many  :submission_quantities, dependent: :destroy, :order => "beginning_value DESC"
   validates :name,  presence: true, length: { maximum: 50 }, 
             uniqueness: { case_sensitive: false }
   validates :description,  presence: true, length: { maximum: 1000 }

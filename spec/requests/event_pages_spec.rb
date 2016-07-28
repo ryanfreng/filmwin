@@ -100,7 +100,7 @@ describe 'Event pages' do
     it { should have_title("Update event") }
 
     describe "page" do
-      it { should have_content("Update your event") }
+      it { should have_content("Update Event") }
       ['Name', 'Sub heading', 'Description', 'Entry start date',
                 'Entry end date', 'Judging date', 'Show date', 'Paypal email address'].each do |n|
         it { should have_content(n) }

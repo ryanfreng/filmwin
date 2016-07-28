@@ -6,4 +6,8 @@ class AdminController < ApplicationController
     @events = Event.all.sort {|a, b| b.show_date <=> a.show_date }
   end
 
+  def events
+    @event = Event.find(params[:id])    
+  end
+
 end

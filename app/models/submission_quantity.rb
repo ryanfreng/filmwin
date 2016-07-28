@@ -7,8 +7,10 @@ class SubmissionQuantity < ActiveRecord::Base
   validate :non_overlapping
 
   def siblings
-    if event
+    if !self.new_record? and !event.nil?
       s = event.submission_quantities.where('id <> ?', id)
+    elsif self.event_id
+      s = Event.find(event_id).submission_quantities
     end
   end
 
@@ -17,12 +19,13 @@ class SubmissionQuantity < ActiveRecord::Base
     def non_overlapping
       if siblings and !siblings.empty?
         siblings.each do |s|
-          if (s.beginning_value < beginning_value) and (s.end_value > beginning_value)
-            errors.add(:beginning_value, 'Beginning_value may not overlap another another submission_quantity.')
-            false
-          elsif s.end_value > end_value and s.beginning_value < end_value
-            errors.add(:end_value, 'End_Value may not overlap another submission_quantity')
-            false
+          if (s.beginning_value <= beginning_value) and (s.end_value >= beginning_value)
+            errors.add(:beginning_value, 'may not overlap another another submission_quantity')
+          elsif s.end_value >= end_value and s.beginning_value <= end_value
+            errors.add(:end_value, 'may not overlap another submission_quantity')
+          elsif s.beginning_value >= beginning_value and s.end_value <= end_value
+            errors.add(:beginning_value, 'may not be contained within another quantity')
+            errors.add(:end_value, 'may not be contained within another quantity')
           end
         end
       end

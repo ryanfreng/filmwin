@@ -48,21 +48,6 @@
   <div class="col-md-3">
     <h2 class="sidebar-heading">Categories</h2>
   </div>
-  <% if can_edit_event? -%>
-    <div class="col-md-9">
-      <div class="row">
-        <div>
-          <h2>New Category</h2>
-          <%= form_for(@new_category) do |c| %>
-            <%= render 'categories/fields', c: c, object: c.object, event: @event %>
-            <%= c.hidden_field :event_id, value: @event.id %>
-
-            <%= c.submit "Save new category", class: "btn btn-large btn-primary" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end -%>
   <div class="col-md-9">
   <% @event.parent_categories.sort { |x, y| y.children.count <=> x.children.count }.each_slice(2) do |slice| -%>
     <div class="row">

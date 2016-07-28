@@ -1,0 +1,9 @@
+<%= render 'shared/error_messages', object: @submission_quantity %>
+
+<%= sq.label :beginning_value %>
+<%= sq.text_field :beginning_value %>
+
+<%= sq.label :end_value %>
+<%= sq.text_field :end_value %>
+
+<%= sq.hidden_field(:event_id, value: @event.id) %>

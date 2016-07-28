@@ -27,9 +27,16 @@ describe SubmissionQuantity do
     it { should be_valid }
   end
 
-  describe "when values overlap" do
+  describe "when the end value is greater than anothers beginning value" do
     before do
       submission_quantity.end_value = submission_quantity2.beginning_value + 1
+    end
+    it { should_not be_valid }
+  end
+
+  describe "when the beginning value is less than anothers end value" do
+    before do
+      submission_quantity2.beginning_value = submission_quantity.end_value - 1
     end
     it { should_not be_valid }
   end

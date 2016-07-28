@@ -12,14 +12,22 @@
         <h3>Categories</h3>
         <ul>
           <%= render partial: 'category', collection: @event.categories.sort_by { |category| category.submissions.count }.reverse %>
-          <li><%= link_to 'Add', new_category_path %></li>
+          <li>
+            <h3>New Category</h2>
+            <%= form_for(Category.new) do |c| %>
+              <%= render 'categories/fields', c: c, object: c.object, event: @event %>
+              <%= c.hidden_field :event_id, value: @event.id %>
+
+              <%= c.submit "Save new category", class: "btn btn-large btn-primary" %>
+            <% end %>
+          </li>
         </ul>
       </div>
       <div class="col-md-6">
         <h3>Submission Quantity</h3>
         <ul>
           <%= render partial: 'submission_quantity', collection: @event.submission_quantities %>
-          <li><%= link_to 'Add', new_submission_quantity_path %></li>
+          <li><%= link_to 'Add', new_submission_quantity_event_path(@event) %></li>
         </ul>
       </div>
     </div>

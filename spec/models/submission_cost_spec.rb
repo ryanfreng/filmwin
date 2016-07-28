@@ -13,4 +13,11 @@ describe SubmissionCost do
 
   it { should be_valid }
 
+  %w(standard earlybird submission_quantity_id user_type_id).each do |n|
+    describe "when #{n} is not present" do
+      before { submission_cost[n] = '' }
+      it { should_not be_valid }
+    end
+  end
+
 end

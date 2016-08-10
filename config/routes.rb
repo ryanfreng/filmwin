@@ -3,7 +3,7 @@ Filmwin::Application.routes.draw do
   resources :events
   resources :submissions
   resources :submission_quantities, only: [:create, :edit, :update, :destroy]
-  resources :submission_costs
+  resources :submission_costs, only: [:create, :edit, :update, :destroy]
   resources :orders, only: [:create]
   resources :categories, only: [:new, :create, :edit, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
@@ -21,6 +21,7 @@ Filmwin::Application.routes.draw do
   match '/admin',       to: 'admin#index',          via: 'get'
   match '/admin/events/:id',   to: 'admin#events',  via: 'get', as: :admin_events
   match '/events/:event_id/submission_quantities/new', to: 'submission_quantities#new', via: 'get', as: :new_submission_quantity_event
+  match '/events/:event_id/submission_costs/new', to: 'submission_costs#new', via: 'get', as: :new_submission_cost_event
 
 
 end

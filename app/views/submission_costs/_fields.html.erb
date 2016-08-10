@@ -1,0 +1,13 @@
+<%= render 'shared/error_messages', object: @submission_cost %>
+
+<%= sc.label :submission_quantity %>
+<%= sc.select :submission_quantity_id, @event.submission_quantities.map { |sq| ["#{sq.beginning_value}-#{sq.end_value}", sq.id] }, include_blank: " " %>
+
+<%= sc.label :user_type %>
+<%= sc.select :user_type_id, UserType.all.map { |ut| [ut.name, ut.id] }, include_blank: " " %>
+
+<%= sc.label :earlybird %>
+<%= sc.text_field :earlybird %>
+
+<%= sc.label :standard %>
+<%= sc.text_field :standard %>

@@ -35,6 +35,7 @@ describe SubmissionQuantity do
   end
 
   describe "when the beginning value is less than anothers end value" do
+    subject { submission_quantity2 }
     before do
       submission_quantity2.beginning_value = submission_quantity.end_value - 1
     end

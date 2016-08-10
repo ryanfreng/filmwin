@@ -26,7 +26,7 @@ describe 'Categegory pages' do
       describe "and owner of event" do
         it { should have_link('Edit event', href: edit_event_path(category.event)) }
         it { should have_link('Edit', href: edit_category_path(category)) }
-        it { should have_content('New Category')}
+        it { should_not have_content('New Category')}
 
         describe "clicking on edit category" do
           before { click_link("Edit") }
@@ -59,22 +59,23 @@ describe 'Categegory pages' do
 
         end
 
-        describe "new category" do
-          let(:name) { 'Wacky Wideos' }
-          let(:dsc)  { "The wideos you won't show anyone else!" }
+        # describe "new category" do
+        #   let(:name) { 'Wacky Wideos' }
+        #   let(:dsc)  { "The wideos you won't show anyone else!" }
 
-          before do
-            fill_in "Name",         with: name
-            fill_in "Description",  with: dsc
-            click_button "Save new category"
-          end
+        #   before do
+        #     fill_in "Name",         with: name
+        #     fill_in "Description",  with: dsc
+        #     click_button "Save new category"
+        #   end
 
-          it { should have_selector('div.alert.alert-success') }
-          it { should have_content(name) }
-          it { should have_content(dsc) }
+        #   it { should have_selector('div.alert.alert-success') }
+        #   it { should have_content(name) }
+        #   it { should have_content(dsc) }
+        # need test for adding new category
 
 
-        end
+        # end
 
       end
 

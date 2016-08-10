@@ -7,4 +7,8 @@ class SubmissionCost < ActiveRecord::Base
   validates :user_type_id, presence: true
   validates :submission_quantity_id, presence: true
 
+  def event
+    submission_quantity.event
+  end
+
 end

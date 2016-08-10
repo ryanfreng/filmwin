@@ -1,4 +1,5 @@
 <li>
-  <%= submission_quantity.beginning_value %> -
-  <%= submission_quantity.end_value %>
+  <h4><%= submission_quantity.beginning_value %> -
+  <%= submission_quantity.end_value %></h4>
+  <%= submission_quantity.submission_costs.map{|sc| "#{sc.user_type.name}: #{sc.earlybird}/#{sc.standard}"}.join(", ") %>
 </li>

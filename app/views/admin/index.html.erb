@@ -4,7 +4,7 @@
   <div class="col-md-6 col-md-offset-3">
     <ul>
       <% @events.each do |e| %>
-      <li><%= link_to e.name, admin_event_path(e) %></li>
+      <li><%= link_to e.name, admin_events_path(e) %></li>
       <% end %>
     </ul>
   </div>

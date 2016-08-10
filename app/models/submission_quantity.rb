@@ -1,6 +1,7 @@
 class SubmissionQuantity < ActiveRecord::Base
   belongs_to :event
-
+  has_many  :submission_costs
+  
   validates :beginning_value, presence: true, numericality: { only_integer: true }
   validates :end_value, presence: true, numericality: { only_integer: true }
   validates :event_id, presence: true

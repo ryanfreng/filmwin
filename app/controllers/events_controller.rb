@@ -57,7 +57,9 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:name, :sub_heading, :description,
                                     :entry_start_date, :entry_end_date,
-                                    :judging_date, :show_date, :paypal_email_address)
+                                    :earlybird_date,
+                                    :judging_date, :show_date, 
+                                    :paypal_email_address)
     end
 
     def correct_user

@@ -1,0 +1,12 @@
+<% provide(:title, 'New Submission Cost') %>
+<h1>New submission cost for "<%= @event.name %>"</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@submission_cost) do |sc| %>
+      <%= render 'fields', sc: sc %>
+
+      <%= sc.submit "Add Cost", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

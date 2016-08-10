@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727212412) do
+ActiveRecord::Schema.define(version: 20160810205127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160727212412) do
     t.integer  "user_id"
     t.string   "sub_heading"
     t.string   "paypal_email_address"
+    t.datetime "earlybird_date"
   end
 
   create_table "orders", force: true do |t|
@@ -115,13 +116,10 @@ ActiveRecord::Schema.define(version: 20160727212412) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",             default: false
+    t.boolean  "admin",           default: false
     t.string   "title"
     t.string   "company"
     t.integer  "user_type_id"
-    t.string   "activation_digest"
-    t.boolean  "activated",         default: false
-    t.datetime "activated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

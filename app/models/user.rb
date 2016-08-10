@@ -40,14 +40,29 @@ class User < ActiveRecord::Base
 
   def unpaid_submissions(event)
     us = []
-    submissions.where(event: event, order_id: nil).each do |s|
+    submissions.where(event_id: event, order_id: nil).each do |s|
       #us << s if s.order.nil?
       us << s
     end
   end
 
   def current_cost(event)
-    if Date.today < (event.entry_start_date + 31.days)
+    se = []
+    submissions.each do |s|
+      se << s if s.event == event
+    end
+    sub_count = se.count
+    submission_quantity = SubmissionQuantity.where("event_id = #{event.id} and beginning_value <= #{sub_count} and end_value >= #{sub_count}").first
+    if submission_quantity
+      submission_cost = SubmissionCost.where("submission_quantity_id = #{submission_quantity.id} and user_type_id = #{user_type.id}").first
+      if submission_cost
+        if Date.today <= event.earlybird_date
+          submission_cost.earlybird
+        else
+          submission_cost.standard
+        end
+      end
+    elsif Date.today < event.earlybird_date
       user_type.earlybird_cost
     else
       user_type.standard_cost

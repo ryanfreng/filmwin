@@ -21,3 +21,6 @@
 
 # Ignore compiled files
 /public/assets
+
+# Backups
+/latest.dump

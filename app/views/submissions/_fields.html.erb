@@ -12,11 +12,17 @@
 <div class="form-group">
 <%= s.label :video_url %>
 <%= s.text_field :video_url, placeholder: "youtube & vimeo", class: "form-control" %>
-<p class="help-block">If you need to upload a video you can do so after you save this submission</p>
+<p class="help-block">If you need to upload a video you can do so after you save this submission.</p>
 </div>
 
 <%= s.label :user_role, "Role" %>
 <%= s.text_field :user_role, placeholder: "producer, editor, spectator", class: "form-control" %>
+
+<div class="form-group">
+<%= s.label :entrant_name %>
+<%= s.text_field :entrant_name, placeholder: "orson wells", class: "form-control" %>
+<p class="help-block">Who will receive the award if one is given (if different than submitter)?</p>
+</div>
 
 <%= s.label :client %>
 <%= s.text_field :client, placeholder: "walt disney", class: "form-control" %>
@@ -39,5 +45,8 @@
 <%= s.label :budget %>
 <%= s.text_field :budget, placeholder: "you mean like a number... on paper?", class: "form-control" %>
 
+<div class="form-group">
 <%= s.label :comments_other, "Goals of Piece & Other Comments" %>
 <%= s.text_area :comments_other, class: "form-control" %>
+<p class="help-block">You must enter a goal! If you do not, we will not know how to judge if your piece achieves it's purpose. Be as detailed as possible.</p>
+</div>

@@ -21,6 +21,7 @@ describe Submission do
   it { should respond_to(:producer) }
   it { should respond_to(:order) }
   it { should respond_to(:order_id) }
+  it { should respond_to(:entrant_name) }
 
   it { should be_valid }
 

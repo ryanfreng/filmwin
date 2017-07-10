@@ -132,7 +132,8 @@ describe 'Submission Pages' do
     let!(:submissions) { FactoryGirl.create_list( :submission, 70, 
                           category: categories.sample,
                           user: users.sample,
-                          event: event ) }
+                          event: event, 
+                          comments_other: 'Regular comment' ) }
 
     before do
       sign_in admin

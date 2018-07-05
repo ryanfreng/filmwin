@@ -16,6 +16,7 @@ describe 'Submission Pages' do
     it { should have_content(submission.event.name) }
     it { should have_content(submission.category.name) }    
     it { should have_content(submission.title) }
+    it { should have_content(submission.recipient_name) }
     it { should have_content(submission.user_role) }
     it { should have_content(submission.client) }
     it { should have_content(submission.budget) }
@@ -55,7 +56,7 @@ describe 'Submission Pages' do
   describe "new" do
     let!(:user)      { FactoryGirl.create(:user) }
     let!(:event)     { submission.event }
-    let!(:category)  { submission.category }
+    let!(:categories)  { event.categories }
     let(:submit)    { "Submit entry" }
     before do
       sign_in user
@@ -65,10 +66,24 @@ describe 'Submission Pages' do
 
     it { should have_content("New Submission") }
     it { should have_content(event.name) }
+    it { should have_select('Category', :options => [categories.map{|c| c.name}] ) }
     it { should have_content('Client') }
     it { should have_content('Goals of Piece & Other Comments')}
 
+
     describe "with invalid information" do
+      let!(:title) { "Boom shakalaka" }    
+      before do
+        select(categories.first.name, :from => 'Category')
+        fill_in "Title",              with: title
+        fill_in "Video url",          with: "https://www.youtube.com/watch?v=XyjvCRowFrM"
+        fill_in "Recipient name",     with: "The Rock"
+        fill_in "Role",               with: "awesomesauce"
+        fill_in "Production company", with: "Backflip Films"
+        fill_in "Budget",             with: "10k"   
+        fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
+        #find('#submission_category_id').find(:xpath, 'option[1]').select_option
+      end
 
       it "should not create a submission" do
         expect { click_button submit }.not_to change(Submission, :count)
@@ -77,48 +92,48 @@ describe 'Submission Pages' do
       describe "after submission" do
         before { click_button submit }
         it { should have_content("error") }
+        it { should have_content("Category can't be blank") }
       end
     end
 
-    # describe "with valid information" do
-    #   let!(:title) { "Boom shakalaka" }    
-    #   before do
-    #     fill_in "Title",              with: title
-    #     fill_in "Video url",          with: "https://www.youtube.com/watch?v=XyjvCRowFrM"
-    #     fill_in "Role",               with: "awesomesauce"
-    #     fill_in "Production company", with: "Backflip Films"
-    #     fill_in "Budget",             with: "10k"   
-    #     #select first('#submission_category_id option').text, from: 'submission_category_id'
-    #     #select category.name, from: 'submission_category_id'
-    #     option = first('#submission_category_id option').text
-    #     select option, from: 'submission_category_id'
-    #   end
+    describe "with valid information" do
+      let!(:title) { "Boom shakalaka" }    
+      before do
+        fill_in "Title",              with: title
+        fill_in "Video url",          with: "https://www.youtube.com/watch?v=XyjvCRowFrM"
+        fill_in "Recipient name",     with: "The Rock"
+        fill_in "Role",               with: "awesomesauce"
+        fill_in "Production company", with: "Backflip Films"
+        fill_in "Budget",             with: "10k"   
+        fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
+        find('#submission_category_id').find(:xpath, 'option[1]').select_option
+      end
 
-    #   it "should create a submission" do
-    #     expect { click_button submit }.to change(Submission, :count)
-    #   end
+      it "should create a submission" do    
+        expect { click_button submit }.to change(Submission, :count).by(1)
+      end
 
-    #   describe "after saving the submission with video url" do
-    #     before do
-    #       click_button submit
-    #     end
+      describe "after saving the submission with video url" do
+        before do
+          click_button submit
+        end
 
-    #     it { should have_content(category.name) }
-    #     it { should have_content(event.name) }
-    #     it { should have_selector("div.alert.alert-success") }
-    #     it { should_not have_selector("div.alert.alert-success") }
-    #     it { should have_content('Finish and pay') }
-    #     it { should_not have_content('Upload video') }
-    #   end
+        it { should have_content(category.name) }
+        it { should have_content(event.name) }
+        it { should have_selector("div.alert.alert-success") }
+        it { should_not have_selector("div.alert.alert-success") }
+        it { should have_content('Finish and pay') }
+        it { should_not have_content('Upload video') }
+      end
 
-    #   describe "on user page" do
-    #     before do
-    #       click_button submit
-    #       visit user_page(user)
-    #     end
-    #     it { should have_content(title)}
-    #   end
-    # end
+      describe "on user page" do
+        before do
+          click_button submit
+          visit user_path(user)
+        end
+        it { should have_content(title)}
+      end
+    end
 
 
 

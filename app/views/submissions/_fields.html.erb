@@ -12,16 +12,22 @@
 <div class="form-group">
 <%= s.label :video_url %>
 <%= s.text_field :video_url, placeholder: "youtube & vimeo", class: "form-control" %>
-<p class="help-block">If you need to upload a video you can do so after you save this submission.</p>
+<p class="help-block">ONLY youtube and vimeo links! If you need to upload, you can do that after you submit this form.</p>
 </div>
 
 <%= s.label :user_role, "Role" %>
 <%= s.text_field :user_role, placeholder: "producer, editor, spectator", class: "form-control" %>
 
 <div class="form-group">
+<%= s.label :recipient_name %>
+<%= s.text_field :recipient_name, placeholder: "m night shyamalan", class: "form-control" %>
+<p class="help-block">Who will receive the award should one be given.</p>
+</div>
+
+<div class="form-group">
 <%= s.label :entrant_name %>
 <%= s.text_field :entrant_name, placeholder: "orson wells", class: "form-control" %>
-<p class="help-block">Who will receive the award if one is given (if different than submitter)?</p>
+<p class="help-block">Who is entering this submission, if entering for someone else.</p>
 </div>
 
 <%= s.label :client %>

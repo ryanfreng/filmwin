@@ -68,6 +68,8 @@ class SubmissionsController < ApplicationController
                                     :event_id,
                                     :category_id,
                                     :video_url,
+                                    :recipient_name,
+                                    :entrant_name,
                                     :user_role,
                                     :client, 
                                     :title,

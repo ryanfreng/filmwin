@@ -59,6 +59,8 @@ FactoryGirl.define do
     event               { self.category.event }
     user                { self.event.user }
     user_role           { Faker::Name.name }
+    recipient_name      { Faker::Name.name }
+    entrant_name        { Faker::Name.name }
     client              { Faker::Company.name }
     title               { Faker::Company.catch_phrase }
     budget              { Faker::Number.number(4) }

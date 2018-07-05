@@ -6,10 +6,11 @@ class Submission < ActiveRecord::Base
   belongs_to :event
   belongs_to :order
 
-  validates :title, presence: true
   validates :user, presence: true
   validates :category, presence: true
   validates :event, presence: true
+  validates :title, presence: true
+  validates :recipient_name, presence: true
   validates :comments_other, presence: true
   #VALID_VIDEO_URL_REGEX = /http:\/\/(?:www.)?(vimeo|youtube).com\/(?:watch\?v=)?(.*?)(?:\z|&)/
   VALID_VIDEO_URL_REGEX = /(http(s)?\:\/\/)?((www\.)?(youtube|vimeo)\.com|youtu\.?be)\/\w+/

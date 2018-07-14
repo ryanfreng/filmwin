@@ -52,10 +52,13 @@ FactoryGirl.define do
     name          { Faker::Name.name + ' ' + Faker::Lorem.word }
     description   { Faker::Lorem.sentence(2) }
     event
+    factory :sub_category do |sub|
+      sub.parent {FactoryGirl.create(:category)}
+    end
   end
 
   factory :submission do
-    category
+    category            { FactoryGirl.create(:sub_category) }
     event               { self.category.event }
     user                { self.event.user }
     user_role           { Faker::Name.name }

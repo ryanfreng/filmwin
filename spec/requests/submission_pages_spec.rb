@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Submission Pages' do
   
-  let!(:submission)  { FactoryGirl.create(:submission) }
+  let(:submission)  { FactoryGirl.create(:submission) }
 
   subject { page }
 
@@ -55,8 +55,9 @@ describe 'Submission Pages' do
 
   describe "new" do
     let!(:user)      { FactoryGirl.create(:user) }
-    let!(:event)     { submission.event }
-    let!(:categories)  { event.categories }
+    let!(:event)     { FactoryGirl.create(:event) }
+    let!(:main_categories)  { FactoryGirl.create_list(:category, 3, event_id: event.id) }
+    let!(:categories) { FactoryGirl.create_list(:sub_category, 3, event_id: event.id, parent: main_categories.sample)}
     let(:submit)    { "Submit entry" }
     before do
       sign_in user
@@ -64,25 +65,31 @@ describe 'Submission Pages' do
       visit new_submission_path(id: @event.id)
     end
 
+    describe "event" do
+      it "should have a category" do
+        expect(event.categories).to include(categories.first)
+      end
+    end
+
     it { should have_content("New Submission") }
     it { should have_content(event.name) }
-    it { should have_select('Category', :options => [categories.map{|c| c.name}] ) }
+    it { should have_content('Category') }
+    it { should_not have_select('Category', selected: 'Choose a category') }
+    it { should have_select('Category', with_options: ['Choose a category'] + categories.map{|c| c.name} ) }
     it { should have_content('Client') }
     it { should have_content('Goals of Piece & Other Comments')}
-
 
     describe "with invalid information" do
       let!(:title) { "Boom shakalaka" }    
       before do
-        select(categories.first.name, :from => 'Category')
+        select('Choose a category', :from => 'Category')
         fill_in "Title",              with: title
-        fill_in "Video url",          with: "https://www.youtube.com/watch?v=XyjvCRowFrM"
+        fill_in "Video url",          with: "NOT VALID"
         fill_in "Recipient name",     with: "The Rock"
         fill_in "Role",               with: "awesomesauce"
         fill_in "Production company", with: "Backflip Films"
         fill_in "Budget",             with: "10k"   
         fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
-        #find('#submission_category_id').find(:xpath, 'option[1]').select_option
       end
 
       it "should not create a submission" do
@@ -92,13 +99,15 @@ describe 'Submission Pages' do
       describe "after submission" do
         before { click_button submit }
         it { should have_content("error") }
-        it { should have_content("Category can't be blank") }
+        it { should have_content("* Category can't be blank") }
       end
     end
 
     describe "with valid information" do
-      let!(:title) { "Boom shakalaka" }    
+      let!(:title) { "Boom shakalaka" }   
+      let!(:the_category) { categories.first.name } 
       before do
+        select(the_category, :from => 'Category')
         fill_in "Title",              with: title
         fill_in "Video url",          with: "https://www.youtube.com/watch?v=XyjvCRowFrM"
         fill_in "Recipient name",     with: "The Rock"
@@ -106,7 +115,6 @@ describe 'Submission Pages' do
         fill_in "Production company", with: "Backflip Films"
         fill_in "Budget",             with: "10k"   
         fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
-        find('#submission_category_id').find(:xpath, 'option[1]').select_option
       end
 
       it "should create a submission" do    
@@ -118,11 +126,10 @@ describe 'Submission Pages' do
           click_button submit
         end
 
-        it { should have_content(category.name) }
+        it { should have_content(the_category) }
         it { should have_content(event.name) }
         it { should have_selector("div.alert.alert-success") }
-        it { should_not have_selector("div.alert.alert-success") }
-        it { should have_content('Finish and pay') }
+        it { should have_content('Finish and Pay') }
         it { should_not have_content('Upload video') }
       end
 

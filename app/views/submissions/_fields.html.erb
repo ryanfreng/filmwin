@@ -3,10 +3,10 @@
 
 <%= render 'shared/error_messages', object: @submission %>
 
-<%= s.label :category_id %>
+* <%= s.label :category_id %>
 <%= s.grouped_collection_select :category_id, @event.parent_categories, :children, :name, :id, :name, { prompt: "Choose a category" }, { class: "form-control" } %>
 
-<%= s.label :title %>
+* <%= s.label :title %>
 <%= s.text_field :title, placeholder: 'something awesome', class: "form-control" %>
 
 <div class="form-group">
@@ -19,7 +19,7 @@
 <%= s.text_field :user_role, placeholder: "producer, editor, spectator", class: "form-control" %>
 
 <div class="form-group">
-<%= s.label :recipient_name %>
+* <%= s.label :recipient_name %>
 <%= s.text_field :recipient_name, placeholder: "m night shyamalan", class: "form-control" %>
 <p class="help-block">Who will receive the award should one be given.</p>
 </div>
@@ -52,7 +52,7 @@
 <%= s.text_field :budget, placeholder: "you mean like a number... on paper?", class: "form-control" %>
 
 <div class="form-group">
-<%= s.label :comments_other, "Goals of Piece & Other Comments" %>
+* <%= s.label :comments_other, "Goals of Piece & Other Comments" %>
 <%= s.text_area :comments_other, class: "form-control" %>
 <p class="help-block">You must enter a goal! If you do not, we will not know how to judge if your piece achieves it's purpose. Be as detailed as possible.</p>
 </div>

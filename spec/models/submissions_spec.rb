@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Submission do
   let(:submission) { FactoryGirl.create(:submission) }
+  let(:category)  {submission.category}
+  let(:event)     {submission.event}
 
   subject { submission }
 
@@ -24,6 +26,16 @@ describe Submission do
   it { should respond_to(:entrant_name) }
 
   it { should be_valid }
+
+  describe "category and event should exist" do
+    it "should have a valid event" do
+      expect(submission.event.name).to eq event.name
+    end
+
+    it "should have a valid category" do
+      expect(submission.category.name).to eq category.name
+    end
+  end
 
   describe "when required elements are not present" do
     %w(user_id event_id category_id title).each do |s|

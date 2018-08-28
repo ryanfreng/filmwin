@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180705183304) do
+ActiveRecord::Schema.define(version: 20180828135625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20180705183304) do
     t.integer  "order_id"
     t.string   "entrant_name"
     t.string   "recipient_name"
+    t.text     "extra_crew"
   end
 
   create_table "user_types", force: true do |t|

@@ -24,6 +24,7 @@ describe Submission do
   it { should respond_to(:order) }
   it { should respond_to(:order_id) }
   it { should respond_to(:entrant_name) }
+  it { should respond_to(:extra_crew) }
 
   it { should be_valid }
 

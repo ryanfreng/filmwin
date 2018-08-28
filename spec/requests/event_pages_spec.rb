@@ -119,7 +119,7 @@ describe 'Event pages' do
 
     describe "with valid information" do
       let(:new_name)              { 'New Wave Awards' }
-      let(:new_entry_start_date)  { Date.today }
+      let(:new_entry_start_date)  { Time.now }
       let(:new_sub_heading)       { Faker::Lorem.sentence(2) }
       let(:new_paypal_email)      { 'random_facilitator@gmail.com' }
 

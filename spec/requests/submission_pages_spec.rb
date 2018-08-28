@@ -25,6 +25,7 @@ describe 'Submission Pages' do
     it { should have_content(submission.director) }
     it { should have_content(submission.editor) }
     it { should have_content(submission.producer) }
+    it { should have_content(submission.extra_crew) }
     it { should have_link("", href: edit_submission_path(submission)) }
     it { should have_content("Goals of Piece & Other Comments")}
 
@@ -77,6 +78,7 @@ describe 'Submission Pages' do
     it { should_not have_select('Category', selected: 'Choose a category') }
     it { should have_select('Category', with_options: ['Choose a category'] + categories.map{|c| c.name} ) }
     it { should have_content('Client') }
+    it { should have_content('Additional Crew')}
     it { should have_content('Goals of Piece & Other Comments')}
 
     describe "with invalid information" do
@@ -89,6 +91,7 @@ describe 'Submission Pages' do
         fill_in "Role",               with: "awesomesauce"
         fill_in "Production company", with: "Backflip Films"
         fill_in "Budget",             with: "10k"   
+        fill_in "Additional Crew",    with: "Gaffer: Lighting Guy, Designer: Phil"  
         fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
       end
 
@@ -113,6 +116,7 @@ describe 'Submission Pages' do
         fill_in "Recipient name",     with: "The Rock"
         fill_in "Role",               with: "awesomesauce"
         fill_in "Production company", with: "Backflip Films"
+        fill_in "Additional Crew",    with: "Gaffer: Lighting Guy, Designer: Phil"  
         fill_in "Budget",             with: "10k"   
         fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
       end
@@ -128,6 +132,7 @@ describe 'Submission Pages' do
 
         it { should have_content(the_category) }
         it { should have_content(event.name) }
+        it { should have_content("Additional Crew") }
         it { should have_selector("div.alert.alert-success") }
         it { should have_content('Finish and Pay') }
         it { should_not have_content('Upload video') }
@@ -141,8 +146,6 @@ describe 'Submission Pages' do
         it { should have_content(title)}
       end
     end
-
-
 
   end
 

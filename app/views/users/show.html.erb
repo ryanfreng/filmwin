@@ -45,15 +45,16 @@
             </p>
             <ul>
               <li><strong>Recipient Name: </strong><%= s.recipient_name %></li>
-              <li><strong>Role: </strong><%= s.user_role %></li>
-              <li><strong>Client: </strong><%= s.client %></li>
-              <li><strong>Budget: </strong><%= s.budget %></li>
-              <li><strong>Production Company: </strong><%= s.production_company %></li>
-              <li><strong>Producer: </strong><%= s.producer %></li>
-              <li><strong>Director: </strong><%= s.director %></li>
-              <li><strong>Cinematographer/Videographer: </strong><%= s.cinematographer %></li>
-              <li><strong>Editor: </strong><%= s.editor %></li>
-              <li><strong>Goals of Piece & Other Comments: </strong><%= s.comments_other %></li>
+              <% unless s.user_role.nil? or s.user_role.empty? -%><li><strong>Role: </strong><%= s.user_role %></li><% end -%>
+              <% unless s.client.nil? or s.client.empty? -%><li><strong>Client: </strong><%= s.client %></li><% end -%>
+              <% unless s.budget.nil? or s.budget.empty? -%><li><strong>Budget: </strong><%= s.budget %></li><% end -%>
+              <% unless s.production_company.nil? or s.production_company.empty? -%><li><strong>Production Company: </strong><%= s.production_company %></li><% end -%>
+              <% unless s.producer.nil? or s.producer.empty? -%><li><strong>Producer: </strong><%= s.producer %></li><% end -%>
+              <% unless s.director.nil? or s.director.empty? -%><li><strong>Director: </strong><%= s.director %></li><% end -%>
+              <% unless s.cinematographer.nil? or s.cinematographer.empty? -%><li><strong>Cinematographer/Videographer: </strong><%= s.cinematographer %></li><% end -%>
+              <% unless s.editor.nil? or s.editor.empty? -%><li><strong>Editor: </strong><%= s.editor %></li><% end -%>
+              <% unless s.extra_crew.nil? or s.extra_crew.empty? -%><li><strong>Additional Crew: </strong><%= s.extra_crew %></li><% end -%>
+              <li><strong>Goals of Piece & Other Comments: </strong><p><%= s.comments_other %></p></li>
             </ul>        
           </div>
           <% end -%>

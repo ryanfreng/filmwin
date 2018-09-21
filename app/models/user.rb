@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
     end
     sub_count = se.count
     submission_quantity = SubmissionQuantity.where("event_id = #{event.id} and beginning_value <= #{sub_count} and end_value >= #{sub_count}").first
-    if submission_quantity
+    if submission_quantity && !submission_quantity.empty?
       submission_cost = SubmissionCost.where("submission_quantity_id = #{submission_quantity.id} and user_type_id = #{user_type.id}").first
       if submission_cost
         if Date.today <= event.earlybird_date

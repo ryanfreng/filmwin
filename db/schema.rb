@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180828135625) do
+ActiveRecord::Schema.define(version: 20190701011201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: true do |t|
-    t.string   "name"
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",        limit: 255
     t.text     "description"
     t.integer  "event_id"
     t.integer  "parent_id"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20180828135625) do
     t.datetime "updated_at"
   end
 
-  create_table "events", force: true do |t|
-    t.string   "name"
+  create_table "events", force: :cascade do |t|
+    t.string   "name",                 limit: 255
     t.text     "description"
     t.datetime "entry_start_date"
     t.datetime "entry_end_date"
@@ -35,30 +35,30 @@ ActiveRecord::Schema.define(version: 20180828135625) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "sub_heading"
-    t.string   "paypal_email_address"
+    t.string   "sub_heading",          limit: 255
+    t.string   "paypal_email_address", limit: 255
     t.datetime "earlybird_date"
   end
 
-  create_table "orders", force: true do |t|
+  create_table "orders", force: :cascade do |t|
     t.datetime "payment_date"
-    t.string   "email"
-    t.string   "verify_sign"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "address_city"
-    t.string   "address_name"
-    t.string   "address_state"
-    t.string   "address_street"
-    t.string   "address_zip"
-    t.string   "payment_gross"
-    t.string   "payment_status"
+    t.string   "email",          limit: 255
+    t.string   "verify_sign",    limit: 255
+    t.string   "first_name",     limit: 255
+    t.string   "last_name",      limit: 255
+    t.string   "address_city",   limit: 255
+    t.string   "address_name",   limit: 255
+    t.string   "address_state",  limit: 255
+    t.string   "address_street", limit: 255
+    t.string   "address_zip",    limit: 255
+    t.string   "payment_gross",  limit: 255
+    t.string   "payment_status", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "txn_id"
+    t.string   "txn_id",         limit: 255
   end
 
-  create_table "submission_costs", force: true do |t|
+  create_table "submission_costs", force: :cascade do |t|
     t.integer  "standard"
     t.integer  "earlybird"
     t.integer  "submission_quantity_id"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20180828135625) do
   add_index "submission_costs", ["submission_quantity_id"], name: "index_submission_costs_on_submission_quantity_id", using: :btree
   add_index "submission_costs", ["user_type_id"], name: "index_submission_costs_on_user_type_id", using: :btree
 
-  create_table "submission_quantities", force: true do |t|
+  create_table "submission_quantities", force: :cascade do |t|
     t.integer  "beginning_value"
     t.integer  "end_value"
     t.integer  "event_id"
@@ -80,48 +80,54 @@ ActiveRecord::Schema.define(version: 20180828135625) do
 
   add_index "submission_quantities", ["event_id"], name: "index_submission_quantities_on_event_id", using: :btree
 
-  create_table "submissions", force: true do |t|
+  create_table "submissions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_id"
     t.integer  "category_id"
-    t.string   "user_role"
-    t.string   "client"
-    t.string   "title"
-    t.string   "budget"
-    t.string   "production_company"
+    t.string   "user_role",          limit: 255
+    t.string   "client",             limit: 255
+    t.string   "title",              limit: 255
+    t.string   "budget",             limit: 255
+    t.string   "production_company", limit: 255
     t.text     "comments_other"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "video_url"
-    t.string   "director"
-    t.string   "editor"
-    t.string   "producer"
-    t.string   "cinematographer"
-    t.string   "upload_url"
+    t.string   "video_url",          limit: 255
+    t.string   "director",           limit: 255
+    t.string   "editor",             limit: 255
+    t.string   "producer",           limit: 255
+    t.string   "cinematographer",    limit: 255
+    t.string   "upload_url",         limit: 255
     t.integer  "order_id"
-    t.string   "entrant_name"
-    t.string   "recipient_name"
+    t.string   "contact_name",       limit: 255
+    t.string   "recipient_name",     limit: 255
     t.text     "extra_crew"
+    t.text     "contact_phone"
+    t.text     "contact_email"
+    t.text     "animator"
+    t.text     "writer"
+    t.text     "sound_designer"
+    t.text     "running_time"
   end
 
-  create_table "user_types", force: true do |t|
-    t.string   "name"
+  create_table "user_types", force: :cascade do |t|
+    t.string   "name",           limit: 255
     t.integer  "earlybird_cost"
     t.integer  "standard_cost"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "users", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "remember_token"
-    t.boolean  "admin",           default: false
-    t.string   "title"
-    t.string   "company"
+    t.string   "password_digest", limit: 255
+    t.string   "remember_token",  limit: 255
+    t.boolean  "admin",                       default: false
+    t.string   "title",           limit: 255
+    t.string   "company",         limit: 255
     t.integer  "user_type_id"
   end
 

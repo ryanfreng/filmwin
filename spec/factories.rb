@@ -63,7 +63,9 @@ FactoryGirl.define do
     user                { self.event.user }
     user_role           { Faker::Name.name }
     recipient_name      { Faker::Name.name }
-    entrant_name        { Faker::Name.name }
+    contact_name        { Faker::Name.name }
+    contact_email       { Faker::Internet.email }
+    contact_phone       { Faker::PhoneNumber.cell_phone  }
     client              { Faker::Company.name }
     title               { Faker::Company.catch_phrase }
     budget              { Faker::Number.number(4) }

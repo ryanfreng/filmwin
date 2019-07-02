@@ -17,13 +17,19 @@ describe Submission do
   it { should respond_to(:production_company) }
   it { should respond_to(:comments_other) }
   it { should respond_to(:video_url) } 
+  it { should respond_to(:running_time) } 
   it { should respond_to(:editor) }
+  it { should respond_to(:animator) }
+  it { should respond_to(:writer) }
+  it { should respond_to(:sound_designer) }
   it { should respond_to(:cinematographer) }
   it { should respond_to(:director) }
   it { should respond_to(:producer) }
   it { should respond_to(:order) }
   it { should respond_to(:order_id) }
-  it { should respond_to(:entrant_name) }
+  it { should respond_to(:contact_name) }
+  it { should respond_to(:contact_email) }
+  it { should respond_to(:contact_phone) }
   it { should respond_to(:extra_crew) }
 
   it { should be_valid }

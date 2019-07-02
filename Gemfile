@@ -1,49 +1,48 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.4.6'
 #ruby-gemset=filmwin
 
-gem 'rails', '4.0.8'
-gem 'bootstrap-sass', '3.2.0.1' #'2.3.2.0'
-gem 'sprockets', '2.11.0'
-gem 'pg', '0.15.1'
+gem 'rails', '4.2.8'
+gem 'bootstrap-sass'#, '3.3.7'#, '3.4.1'
+gem 'sprockets'#, '2.12.5'
+gem 'sprockets-rails', '3.0.4'
+gem 'pg', '0.18.0'
 gem 'bcrypt-ruby', '3.1.2'
-#gem 'faker', '1.1.2'
 gem 'faker', '1.4.2'
 gem 'will_paginate', '3.0.7'
-#gem 'bootstrap-will_paginate', '0.0.9'
 gem 'will_paginate-bootstrap', '1.0.1'
 gem 'aws-sdk', '1.50.0'
-gem 'newrelic_rpm', '3.9.1.236'
+gem 'newrelic_rpm' #, '3.9.1.236'
+gem 'multi_json'
 
 group :development, :test do
-  gem 'rspec-rails', '2.13.1'
-  gem 'guard-rspec', '2.5.0'
-  gem 'guard-livereload', require: false
-  gem 'sass-rails-source-maps'
+  gem 'rspec-rails'#, '2.13.1'
+  gem 'guard-rspec'#, '2.5.0'
+  gem 'guard-livereload'#, require: false
+  #gem 'sass-rails-source-maps'
   gem 'coffee-rails-source-maps'
-  gem 'foreman', '0.74.0'
+  gem 'foreman'#, '0.74.0'
   gem 'factory_girl_rails', '4.2.0'
 end
 
 group :test do
-  gem 'selenium-webdriver', '~> 2.43.0'
-  gem 'capybara', '2.1.0'
-  gem 'capybara-bootstrap-datepicker', '0.0.7'
-  gem 'growl', '1.0.3'
-  gem 'spork-rails', '4.0.0'
-  gem 'guard-spork', '1.5.0'
-  gem 'childprocess', '~> 0.5.5'
+  gem 'selenium-webdriver'#, '~> 2.43.0'
+  gem 'capybara'#, '2.1.0'
+  gem 'capybara-bootstrap-datepicker'#, '0.0.7'
+  gem 'growl'#, '1.0.3'
+  gem 'spork', github: 'sporkrb/spork', branch: 'master'
+  gem 'spork-rails'#, '4.0.0'
+  gem 'guard-spork'#, '1.5.0'
+  gem 'childprocess'#, '~> 0.5.5'
 end
 
-gem 'sass-rails', '~> 4.0.1'
+gem 'sass-rails'#, '~> 4.0.1'
 gem 'uglifier', '>= 2.1.0'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'jquery-rails', '3.0.4'
-gem 'turbolinks', '1.1.1'
+gem 'turbolinks'#, '~> 2.5.3'
 gem 'jbuilder', '~> 1.0.2'
-#gem 'axlsx', '~> 2.0.1'
-#gem 'acts_as_xlsx', '~> 1.0.6'
-gem 'axlsx_rails', '~> 0.2.1'
+gem 'axlsx_rails'#, '~> 0.2.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -51,5 +50,5 @@ group :doc do
 end
 
 group :production do
-  gem 'rails_12factor', '0.0.2'
+  gem 'rails_12factor'#, '0.0.2'
 end

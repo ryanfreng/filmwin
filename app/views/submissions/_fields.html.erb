@@ -3,12 +3,19 @@
 
 <%= render 'shared/error_messages', object: @submission %>
 
-<div class="form-group">
-<%= s.label :entrant_name, "Project Submitter" %>
-<%= s.text_field :entrant_name, placeholder: "orson wells", class: "form-control" %>
+<h4>Contact Information</h4>
 <p class="help-block">Who is entering this submission, if entering for someone else.</p>
-</div>
 
+<%= s.label :contact_name, "Name" %>
+<%= s.text_field :contact_name, placeholder: "orson wells", class: "form-control" %>
+
+<%= s.label :contact_name, "Email" %>
+<%= s.text_field :contact_email, placeholder: "orson wells", class: "form-control" %>
+
+<%= s.label :contact_name, "Cell Phone" %>
+<%= s.text_field :contact_phone, placeholder: "orson wells", class: "form-control" %>
+
+<h4>Submission Information</h4>
 * <%= s.label :category_id %>
 <%= s.grouped_collection_select :category_id, @event.parent_categories, :children, :name, :id, :name, { prompt: "Choose a category" }, { class: "form-control" } %>
 
@@ -18,50 +25,60 @@
 <div class="form-group">
 <%= s.label :video_url %>
 <%= s.text_field :video_url, placeholder: "youtube & vimeo", class: "form-control" %>
-<p class="help-block">ONLY youtube and vimeo links! If you need to upload, you can do that after you submit this form.</p>
+<p class="help-block">ONLY youtube and vimeo links! If you need to upload, you can do that after you submit this form. If password required, please put in notes below.</p>
 </div>
 
-<h4>Award Information Below</h4>
-<p class="help-block">Leave fields blank where applicable.</p>
+<%= s.label :running_time %>
+<%= s.text_field :running_time, placeholder: ":30, 1.5m", class: "form-control" %>
+
+<h4>Award Information </h4>
+<p class="help-block">If your project is selected as a winning entry, this information will be printed on
+the awards as you have entered it.</p>
 
 <div class="form-group">
-* <%= s.label :recipient_name %>
+* <%= s.label :recipient_name, "Awardee" %>
 <%= s.text_field :recipient_name, placeholder: "m night shyamalan", class: "form-control" %>
 <p class="help-block">Who will receive the award should one be given (individual or company).</p>
 </div>
 
-<%= s.label :user_role, "Role" %>
-<%= s.text_field :user_role, placeholder: "producer, editor, spectator, production company", class: "form-control" %>
-
 <%= s.label :client %>
 <%= s.text_field :client, placeholder: "walt disney", class: "form-control" %>
 
-<%= s.label :director%>
-<%= s.text_field :director, placeholder: "spielberg", class: "form-control" %>
+<%= s.label :production_company %>
+<%= s.text_field :production_company, placeholder: "edison studios", class: "form-control" %>
 
 <%= s.label :producer%>
 <%= s.text_field :producer, placeholder: "jj abrams", class: "form-control" %>
 
-<%= s.label :cinematographer, "Cinematographer/Videographer" %>
+<%= s.label :director%>
+<%= s.text_field :director, placeholder: "spielberg", class: "form-control" %>
+
+<%= s.label :cinematographer, "DP/Camera" %>
 <%= s.text_field :cinematographer, placeholder: "richard crudo", class: "form-control" %>
 
 <%= s.label :editor%>
 <%= s.text_field :editor, placeholder: "alan heim", class: "form-control" %>
 
-<%= s.label :production_company %>
-<%= s.text_field :production_company, placeholder: "edison studios", class: "form-control" %>
+<%= s.label :animator%>
+<%= s.text_field :animator, placeholder: "john lasseter", class: "form-control" %>
+
+<%= s.label :writer%>
+<%= s.text_field :writer, placeholder: "aaron sorkin", class: "form-control" %>
+
+<%= s.label :sound_designer%>
+<%= s.text_field :sound_designer, placeholder: "Jon Taylor, Frank A. Montaño, Ai-Ling Lee and Mary H. Ellis", class: "form-control" %>
 
 <div class="form-group">
-<%= s.label :extra_crew, "Additional Crew" %>
+<%= s.label :extra_crew, "Additional Crew/Credits" %>
 <%= s.text_area :extra_crew, class: "form-control" %>
-<p class="help-block">Please list any additional crew who you would like credited in the project, ie. Animator: Walt Disney, Designer: Steve Jobs.</p>
+<p class="help-block">Please list any additional credits for the project.</p>
 </div>
 
 <%= s.label :budget %>
 <%= s.text_field :budget, placeholder: "you mean like a number... on paper?", class: "form-control" %>
 
 <div class="form-group">
-* <%= s.label :comments_other, "Goals of Piece & Other Comments" %>
+* <%= s.label :comments_other, "Objective, interesting challenges or unique aspects you’d like the judges to consider." %>
 <%= s.text_area :comments_other, class: "form-control" %>
 <p class="help-block">You must enter a goal! If you do not, we will not know how to judge if your piece achieves it's purpose. Be as detailed as possible.</p>
 </div>

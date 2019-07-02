@@ -16,18 +16,21 @@ describe 'Submission Pages' do
     it { should have_content(submission.event.name) }
     it { should have_content(submission.category.name) }    
     it { should have_content(submission.title) }
+    it { should have_content(submission.running_time) }
     it { should have_content(submission.recipient_name) }
-    it { should have_content(submission.user_role) }
-    it { should have_content(submission.client) }
+    it { should have_content(submission.client) }    
     it { should have_content(submission.budget) }
     it { should have_content(submission.production_company) }
     it { should have_content(submission.comments_other)}
     it { should have_content(submission.director) }
     it { should have_content(submission.editor) }
+    it { should have_content(submission.animator) }
+    it { should have_content(submission.writer) }
+    it { should have_content(submission.sound_designer) }
     it { should have_content(submission.producer) }
     it { should have_content(submission.extra_crew) }
     it { should have_link("", href: edit_submission_path(submission)) }
-    it { should have_content("Goals of Piece & Other Comments")}
+    it { should have_content("Objective, interesting challenges or unique aspects you’d like the judges to consider.")}
 
     describe "with no video url" do
       let(:submission2)  { FactoryGirl.create(:submission, video_url: nil) }
@@ -79,7 +82,7 @@ describe 'Submission Pages' do
     it { should have_select('Category', with_options: ['Choose a category'] + categories.map{|c| c.name} ) }
     it { should have_content('Client') }
     it { should have_content('Additional Crew')}
-    it { should have_content('Goals of Piece & Other Comments')}
+    it { should have_content('Objective, interesting challenges or unique aspects you’d like the judges to consider.')}
 
     describe "with invalid information" do
       let!(:title) { "Boom shakalaka" }    
@@ -87,12 +90,11 @@ describe 'Submission Pages' do
         select('Choose a category', :from => 'Category')
         fill_in "Title",              with: title
         fill_in "Video url",          with: "NOT VALID"
-        fill_in "Recipient name",     with: "The Rock"
-        fill_in "Role",               with: "awesomesauce"
+        fill_in "Name",               with: "The Rock"
         fill_in "Production company", with: "Backflip Films"
         fill_in "Budget",             with: "10k"   
         fill_in "Additional Crew",    with: "Gaffer: Lighting Guy, Designer: Phil"  
-        fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
+        fill_in "Objective, interesting challenges or unique aspects you’d like the judges to consider.",     with: "This is my comment"
       end
 
       it "should not create a submission" do
@@ -113,12 +115,11 @@ describe 'Submission Pages' do
         select(the_category, :from => 'Category')
         fill_in "Title",              with: title
         fill_in "Video url",          with: "https://www.youtube.com/watch?v=XyjvCRowFrM"
-        fill_in "Recipient name",     with: "The Rock"
-        fill_in "Role",               with: "awesomesauce"
+        fill_in "Name",               with: "The Rock"
         fill_in "Production company", with: "Backflip Films"
         fill_in "Additional Crew",    with: "Gaffer: Lighting Guy, Designer: Phil"  
         fill_in "Budget",             with: "10k"   
-        fill_in "Goals of Piece & Other Comments",     with: "This is my comment"
+        fill_in "Objective, interesting challenges or unique aspects you’d like the judges to consider.",     with: "This is my comment"
       end
 
       it "should create a submission" do    

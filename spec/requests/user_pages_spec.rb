@@ -200,10 +200,10 @@ describe "User pages" do
     end
 
     describe "default form content" do
-      it { should have_selector('#user_name', user.name) }
-      it { should have_selector('#user_email', user.email) }
-      it { should have_selector('#user_title', user.title) }
-      it { should have_selector('#user_company', user.company) }
+      it { should have_selector('#user_name', text: user.name) }
+      it { should have_selector('#user_email', text: user.email) }
+      it { should have_selector('#user_title', text: user.title) }
+      it { should have_selector('#user_company', text: user.company) }
 
     end
 

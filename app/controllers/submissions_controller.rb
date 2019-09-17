@@ -83,6 +83,10 @@ class SubmissionsController < ApplicationController
                                     :producer,
                                     :editor,
                                     :cinematographer,
-                                    :extra_crew )
+                                    :extra_crew,
+                                    :running_time,
+                                    :animator,
+                                    :writer,
+                                    :sound_designer )
     end
 end
